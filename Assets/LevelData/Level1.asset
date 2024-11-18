@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dbac4b6fd3bea4dadb0f00741b1eaa, type: 3}
+  m_Name: Level1
+  m_EditorClassIdentifier: 
+  levelNumber: 1
+  goalNumber: 10
+  timeLimit: 0
+  availableFish:
+  - type: 0
+    amount: 3
+    spawnPos: {x: 10, y: 10}
+    speedX: 0.6
+    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  - type: 0
+    amount: 2
+    spawnPos: {x: 50, y: 30}
+    speedX: 1
+    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  - type: 0
+    amount: 4
+    spawnPos: {x: 70, y: 50}
+    speedX: 0.8
+    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  - type: 0
+    amount: 1
+    spawnPos: {x: 30, y: 70}
+    speedX: 0.7
+    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  - type: 0
+    amount: 1
+    spawnPos: {x: 80, y: 90}
+    speedX: 0.5
+    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  allowNegativeNumbers: 0
+  includeMultiplication: 0
