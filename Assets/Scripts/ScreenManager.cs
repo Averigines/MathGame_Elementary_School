@@ -3,6 +3,7 @@ using UnityEngine;
 public class ScreenManager : MonoBehaviour
 {
     [SerializeField] private GameObject water;
+    [SerializeField] private GameObject waterDistortion;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject background;
     [SerializeField] private GameObject backgroundReflection;
@@ -11,6 +12,7 @@ public class ScreenManager : MonoBehaviour
     void Start()
     {
         SetWaterSize();
+        SetWaterDistortionSize();
         SetPlayerPosition();
         SetBackgroundSize();
         SetBackgroundReflectionSize();
@@ -30,12 +32,25 @@ public class ScreenManager : MonoBehaviour
         Vector3 newScale = new Vector3(ScreenData.seaDimensions.width / spriteRenderer.bounds.size.x, ScreenData.seaDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
+    
+    private void SetWaterDistortionSize()
+    {
+        var spriteRenderer = waterDistortion.GetComponent<SpriteRenderer>();
+        Transform tf = waterDistortion.transform;
+        
+        Vector3 seaCenter = new Vector3((ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f,
+            (ScreenData.seaDimensions.top + ScreenData.seaDimensions.bottom) / 2f, tf.position.z);
+        tf.position = seaCenter;
+        
+        Vector3 newScale = new Vector3(ScreenData.seaDimensions.width / spriteRenderer.bounds.size.x, ScreenData.seaDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        tf.localScale = newScale;
+    }
 
     private void SetPlayerPosition()
     {
         Transform tf = player.transform;
         float posX = (ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f;
-        float posY = ScreenData.seaDimensions.top;
+        float posY = ScreenData.seaDimensions.top + 0.2f;
         tf.position = new Vector3(posX, posY, tf.position.z);
     }
     

@@ -62,8 +62,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _RefractionStrength: 1.55
-    - _WaterSpeed: 0.2
+    - _RefractionStrength: 8.54
+    - _WaterSpeed: -4.15
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
