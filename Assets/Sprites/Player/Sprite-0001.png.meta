@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 2db2ee0163e7ae349b5991b1aa1a4b42
+guid: 752c6457da12b844181868ad5c85dfda
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4973515012461553833
-    second: GraveRobber_fish_0
-  - first:
-      213: 749810958966425850
-    second: GraveRobber_fish_1
-  - first:
-      213: 336148157268066531
-    second: GraveRobber_fish_2
-  - first:
-      213: 8144819658858426703
-    second: GraveRobber_fish_3
+      213: -6007857137893288414
+    second: Sprite-0001_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GraveRobber_fish_0
+      name: Sprite-0001_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 0
-        width: 38
-        height: 34
-      alignment: 9
-      pivot: {x: 0.25, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 757182d62768afab0800000000000000
-      internalID: -4973515012461553833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GraveRobber_fish_1
-      rect:
-        serializedVersion: 2
-        x: 55
-        y: 0
-        width: 39
-        height: 34
+        x: 0
+        y: 27
+        width: 89
+        height: 36
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 1, w: 1}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af883e1381dd76a00800000000000000
-      internalID: 749810958966425850
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GraveRobber_fish_2
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 0
-        width: 39
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3e08dd1d7fc3aa400800000000000000
-      internalID: 336148157268066531
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: GraveRobber_fish_3
-      rect:
-        serializedVersion: 2
-        x: 151
-        y: 0
-        width: 39
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f41ffdd9356380170800000000000000
-      internalID: 8144819658858426703
+      spriteID: 226539a93cdcf9ca0800000000000000
+      internalID: -6007857137893288414
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: afd80d3df12f84b4dba2d7abf885fed4
+    spriteID: 1d179443f972c8c4f9bc8880654b0ea7
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      GraveRobber_fish_0: -4973515012461553833
-      GraveRobber_fish_1: 749810958966425850
-      GraveRobber_fish_2: 336148157268066531
-      GraveRobber_fish_3: 8144819658858426703
+      Sprite-0001_0: -6007857137893288414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
