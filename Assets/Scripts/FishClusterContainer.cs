@@ -21,6 +21,9 @@ public class FishClusterContainer : MonoBehaviour
     }
     private YRange _yRange;
 
+    public delegate void OnFishReeledIn(int points);
+    public event OnFishReeledIn onFishReeledIn;
+
     public void Initialize(FishData fishData, GameObject fishPrefab, float startPosY, DirectionX directionX, DirectionY directionY)
     {
         _fishInContainer = new List<Fish>();
@@ -115,5 +118,11 @@ public class FishClusterContainer : MonoBehaviour
 
         if (transform.position.y > _yRange.max && _directionY == DirectionY.Up) _directionY = DirectionY.Down;
         if (transform.position.y < _yRange.min && _directionY == DirectionY.Down) _directionY = DirectionY.Up;
+    }
+
+    public void GetReeledIn()
+    {
+        onFishReeledIn?.Invoke(_value);
+        Destroy(gameObject);
     }
 }

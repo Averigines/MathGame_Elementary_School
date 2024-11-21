@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private GameObject fishClusterContainerPrefab;
     [SerializeField] private GameObject fishPrefab;
+
+    private int _currPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,9 +39,20 @@ public class LevelManager : MonoBehaviour
         var startPos = ScreenData.GetFishSpawnPos(fishData.spawnPos);
         DirectionX directionX = ScreenData.CoinToss() ? DirectionX.Left : DirectionX.Right;
         DirectionY directionY = ScreenData.CoinToss() ? DirectionY.Up : DirectionY.Down;
+        GameObject go = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
+        
+        var fishCluster = go.GetComponent<FishClusterContainer>();
+        fishCluster.Initialize(fishData, fishPrefab, startPos.y, directionX, directionY);
+        fishCluster.onFishReeledIn += IncreasePoints;
 
-        GameObject fishClusterContainer = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
-        fishClusterContainer.GetComponent<FishClusterContainer>().Initialize(fishData, fishPrefab, startPos.y, directionX, directionY);
+    }
+
+    private void IncreasePoints(int points)
+    {
+        _currPoints += points;
+        print(_currPoints);
+        
+        if (_currPoints == currentLevelData.goalNumber) print("WIN");
     }
 
     // Update is called once per frame

@@ -25,13 +25,12 @@ public class TouchManager : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.CompareTag("Fish")) HandleTouchedFish(hit.collider.gameObject);
+                if (hit.collider.gameObject.CompareTag("Fish"))
+                {
+                    var fishCluster = hit.collider.gameObject.GetComponent<FishClusterContainer>();
+                    fishCluster.GetReeledIn();
+                }
             }
         }
-    }
-    
-    private void HandleTouchedFish(GameObject touchedFish)
-    {
-        Destroy(touchedFish);
     }
 }

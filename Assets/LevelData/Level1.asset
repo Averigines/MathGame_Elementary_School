@@ -17,7 +17,7 @@ MonoBehaviour:
   timeLimit: 0
   availableFish:
   - type: 0
-    amount: 3
+    amount: 5
     spawnPos: {x: 10, y: 10}
     speedX: 0.6
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}

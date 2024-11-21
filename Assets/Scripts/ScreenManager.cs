@@ -25,11 +25,11 @@ public class ScreenManager : MonoBehaviour
         var spriteRenderer = water.GetComponent<SpriteRenderer>();
         Transform tf = water.transform;
         
-        Vector3 seaCenter = new Vector3((ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f,
-            (ScreenData.seaDimensions.top + ScreenData.seaDimensions.bottom) / 2f, tf.position.z);
+        Vector3 seaCenter = new Vector3((ScreenData.seaArea.left + ScreenData.seaArea.right) / 2f,
+            (ScreenData.seaArea.top + ScreenData.seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(ScreenData.seaDimensions.width / spriteRenderer.bounds.size.x, ScreenData.seaDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(ScreenData.seaArea.width / spriteRenderer.bounds.size.x, ScreenData.seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
     
@@ -38,19 +38,19 @@ public class ScreenManager : MonoBehaviour
         var spriteRenderer = waterDistortion.GetComponent<SpriteRenderer>();
         Transform tf = waterDistortion.transform;
         
-        Vector3 seaCenter = new Vector3((ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f,
-            (ScreenData.seaDimensions.top + ScreenData.seaDimensions.bottom) / 2f, tf.position.z);
+        Vector3 seaCenter = new Vector3((ScreenData.seaArea.left + ScreenData.seaArea.right) / 2f,
+            (ScreenData.seaArea.top + ScreenData.seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(ScreenData.seaDimensions.width / spriteRenderer.bounds.size.x, ScreenData.seaDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(ScreenData.seaArea.width / spriteRenderer.bounds.size.x, ScreenData.seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
 
     private void SetPlayerPosition()
     {
         Transform tf = player.transform;
-        float posX = (ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f;
-        float posY = ScreenData.seaDimensions.top + 0.2f;
+        float posX = (ScreenData.seaArea.left + ScreenData.seaArea.right) / 2f;
+        float posY = ScreenData.seaArea.top + 0.2f;
         tf.position = new Vector3(posX, posY, tf.position.z);
     }
     
@@ -59,12 +59,12 @@ public class ScreenManager : MonoBehaviour
         var spriteRenderer = background.GetComponent<SpriteRenderer>();
         Transform tf = background.transform;
 
-        float newScale = ScreenData.backgroundDimensions.width / spriteRenderer.bounds.size.x;
+        float newScale = ScreenData.backgroundArea.width / spriteRenderer.bounds.size.x;
         //Vector3 newScale = new Vector3(ScreenData.backgroundDimensions.width / spriteRenderer.bounds.size.x, ScreenData.backgroundDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = new Vector3(newScale, newScale, tf.localScale.z);
         
-        Vector3 backgroundCenter = new Vector3((ScreenData.backgroundDimensions.left + ScreenData.backgroundDimensions.right) / 2f,
-            (ScreenData.backgroundDimensions.bottom + spriteRenderer.bounds.size.y + ScreenData.backgroundDimensions.bottom) / 2f, tf.position.z);
+        Vector3 backgroundCenter = new Vector3((ScreenData.backgroundArea.left + ScreenData.backgroundArea.right) / 2f,
+            (ScreenData.backgroundArea.bottom + spriteRenderer.bounds.size.y + ScreenData.backgroundArea.bottom) / 2f, tf.position.z);
         tf.position = backgroundCenter;
     }
     
@@ -73,18 +73,18 @@ public class ScreenManager : MonoBehaviour
         var spriteRenderer = backgroundReflection.GetComponent<SpriteRenderer>();
         Transform tf = backgroundReflection.transform;
         
-        Vector3 seaCenter = new Vector3((ScreenData.seaDimensions.left + ScreenData.seaDimensions.right) / 2f,
-            (ScreenData.seaDimensions.top + ScreenData.seaDimensions.bottom) / 2f, tf.position.z);
+        Vector3 seaCenter = new Vector3((ScreenData.seaArea.left + ScreenData.seaArea.right) / 2f,
+            (ScreenData.seaArea.top + ScreenData.seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(ScreenData.seaDimensions.width / spriteRenderer.bounds.size.x, ScreenData.seaDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(ScreenData.seaArea.width / spriteRenderer.bounds.size.x, ScreenData.seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
     
     private void SetReflectionTextureSize()
     {
         reflectionTexture.width = Screen.width;
-        reflectionTexture.height = (int)(Screen.height * (ScreenData.seaDimensions.height / ScreenData.screenDimensions.height));
+        reflectionTexture.height = (int)(Screen.height * (ScreenData.seaArea.height / ScreenData.screenArea.height));
     }
     
     private void SetCameraSize()
@@ -92,8 +92,8 @@ public class ScreenManager : MonoBehaviour
         Transform tf = reflectionCamera.transform;
         reflectionCamera.targetTexture = reflectionTexture;
         reflectionCamera.orthographicSize = backgroundReflection.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        Vector3 cameraCenter = new Vector3((ScreenData.backgroundDimensions.left + ScreenData.backgroundDimensions.right) / 2f,
-            (ScreenData.backgroundDimensions.bottom + reflectionCamera.orthographicSize * 2 + ScreenData.backgroundDimensions.bottom) / 2f, tf.position.z);
+        Vector3 cameraCenter = new Vector3((ScreenData.backgroundArea.left + ScreenData.backgroundArea.right) / 2f,
+            (ScreenData.backgroundArea.bottom + reflectionCamera.orthographicSize * 2 + ScreenData.backgroundArea.bottom) / 2f, tf.position.z);
         tf.position = cameraCenter;
         
         reflectionCamera.enabled = false;

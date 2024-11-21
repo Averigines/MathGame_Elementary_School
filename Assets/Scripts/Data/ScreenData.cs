@@ -5,9 +5,11 @@ using Random = UnityEngine.Random;
 public class ScreenData : MonoBehaviour
 {
     [SerializeField] private float seaHeight = 0.7f;
-    [SerializeField] private float backgroundRatio;
-    
-    public struct ScreenDimensions
+
+    [SerializeField] private float fishSpaceToWaterEdgeX = 0.4f;
+    [SerializeField] private float fishSpaceToWaterEdgeY = 0.4f;
+
+    public struct ScreenArea
     {
         public float bottom;
         public float top;
@@ -16,9 +18,9 @@ public class ScreenData : MonoBehaviour
         public float height;
         public float width;
     }
-    public static ScreenDimensions screenDimensions;
+    public static ScreenArea screenArea;
     
-    public struct SeaDimensions
+    public struct SeaArea
     {
         public float bottom;
         public float top;
@@ -27,9 +29,9 @@ public class ScreenData : MonoBehaviour
         public float height;
         public float width;
     }
-    public static SeaDimensions seaDimensions;
+    public static SeaArea seaArea;
     
-    public struct BackgroundDimensions
+    public struct BackgroundArea
     {
         public float bottom;
         public float top;
@@ -38,53 +40,75 @@ public class ScreenData : MonoBehaviour
         public float height;
         public float width;
     }
-    public static BackgroundDimensions backgroundDimensions;
+    public static BackgroundArea backgroundArea;
+    
+    private struct FishArea
+    {
+        public float bottom;
+        public float top;
+        public float left;
+        public float right;
+        public float height;
+        public float width;
+    }
+    private static FishArea fishArea;
 
     private Camera _mainCamera;
 
     private void Awake()
     {
         _mainCamera = Camera.main;
-        CalculateScreenDimensions();
-        CalculateSeaDimensions();
-        CalculateBackgroundDimensions();
+        CalculateScreenArea();
+        CalculateSeaArea();
+        CalculateBackgroundArea();
+        CalculateFishArea();
     }
 
-    private void CalculateBackgroundDimensions()
+    private void CalculateBackgroundArea()
     {
-        backgroundDimensions.left = screenDimensions.left;
-        backgroundDimensions.right = screenDimensions.right;
-        backgroundDimensions.width = backgroundDimensions.right - backgroundDimensions.left;
+        backgroundArea.left = screenArea.left;
+        backgroundArea.right = screenArea.right;
+        backgroundArea.width = backgroundArea.right - backgroundArea.left;
         
-        backgroundDimensions.bottom = seaDimensions.top;
-        backgroundDimensions.top = screenDimensions.top;
-        backgroundDimensions.height = backgroundDimensions.top - backgroundDimensions.bottom;
+        backgroundArea.bottom = seaArea.top;
+        backgroundArea.top = screenArea.top;
+        backgroundArea.height = backgroundArea.top - backgroundArea.bottom;
         
     }
 
-    private void CalculateSeaDimensions()
+    private void CalculateSeaArea()
     {
-        seaDimensions.bottom = screenDimensions.bottom;
-        seaDimensions.top = screenDimensions.bottom + seaHeight * screenDimensions.height;
-        seaDimensions.left = screenDimensions.left;
-        seaDimensions.right = screenDimensions.right;
-        seaDimensions.height = seaDimensions.top - seaDimensions.bottom;
-        seaDimensions.width = seaDimensions.right - seaDimensions.left;
+        seaArea.bottom = screenArea.bottom;
+        seaArea.top = screenArea.bottom + seaHeight * screenArea.height;
+        seaArea.left = screenArea.left;
+        seaArea.right = screenArea.right;
+        seaArea.height = seaArea.top - seaArea.bottom;
+        seaArea.width = seaArea.right - seaArea.left;
     }
 
-    private void CalculateScreenDimensions()
+    private void CalculateScreenArea()
     {
         Vector3 bottomLeft = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, _mainCamera.nearClipPlane));
         Vector3 topRight = _mainCamera.ViewportToWorldPoint(new Vector3(1, 1, _mainCamera.nearClipPlane));
         
-        screenDimensions.bottom = bottomLeft.y;
-        screenDimensions.top = topRight.y;
-        screenDimensions.left = bottomLeft.x;
-        screenDimensions.right = topRight.x;
-        screenDimensions.height = screenDimensions.top - screenDimensions.bottom;
-        screenDimensions.width = screenDimensions.right - screenDimensions.left;
+        screenArea.bottom = bottomLeft.y;
+        screenArea.top = topRight.y;
+        screenArea.left = bottomLeft.x;
+        screenArea.right = topRight.x;
+        screenArea.height = screenArea.top - screenArea.bottom;
+        screenArea.width = screenArea.right - screenArea.left;
     }
 
+    private void CalculateFishArea()
+    {
+        fishArea.bottom = seaArea.bottom + fishSpaceToWaterEdgeY;
+        fishArea.top = seaArea.top - fishSpaceToWaterEdgeY;
+        fishArea.left = seaArea.left + fishSpaceToWaterEdgeX;
+        fishArea.right = seaArea.right - fishSpaceToWaterEdgeX;
+        fishArea.height = fishArea.top - fishArea.bottom;
+        fishArea.width = fishArea.right - fishArea.left;
+    }
+    
     public static Vector2 GetRandomPosition(float xStart, float xEnd, float yStart, float yEnd)
     {
         float xPos = Random.Range(xStart, xEnd);
@@ -107,8 +131,8 @@ public class ScreenData : MonoBehaviour
 
     public static Vector2 GetFishSpawnPos(Vector2 posInPercent)
     {
-        float spawnPositionX = seaDimensions.left + (posInPercent.x / 100f) * (seaDimensions.right - seaDimensions.left);
-        float spawnPositionY = seaDimensions.top + (posInPercent.y / 100f) * (seaDimensions.bottom - seaDimensions.top);
+        float spawnPositionX = fishArea.left + (posInPercent.x / 100f) * (fishArea.right - fishArea.left);
+        float spawnPositionY = fishArea.top + (posInPercent.y / 100f) * (fishArea.bottom - fishArea.top);
         Vector2 spawnPosition = new Vector2(spawnPositionX, spawnPositionY);
 
         return spawnPosition;
@@ -116,8 +140,8 @@ public class ScreenData : MonoBehaviour
 
     public static bool CheckIfFishClusterNeedsToTurn(DirectionX currDirectionX, Vector3 pos)
     {
-        if (pos.x < seaDimensions.left && currDirectionX == DirectionX.Left) return true;
-        if (pos.x > seaDimensions.right && currDirectionX == DirectionX.Right) return true;
+        if (pos.x < fishArea.left && currDirectionX == DirectionX.Left) return true;
+        if (pos.x > fishArea.right && currDirectionX == DirectionX.Right) return true;
         return false;
     }
 }
