@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private GameObject playerObject;
-    private SpriteRenderer _playerRenderer;
-    [SerializeField] private GameObject boatObject;
-    private SpriteRenderer _boatRenderer;
+    private SpriteRenderer _renderer;
 
     [Header("Rod Strength Thresholds in Percent of the Total Screen Width normalized")]
     [Range(0, 1)][SerializeField] private float rodStrengthThreshold1;
@@ -38,7 +35,7 @@ public class Player : MonoBehaviour
 
         _targetPosition = transform.position;
 
-        _playerRenderer = playerObject.GetComponent<SpriteRenderer>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
     
     void Update()
@@ -62,11 +59,11 @@ public class Player : MonoBehaviour
 
         if (_rodStrength < -_rodStrengthThresholds[RodStrengths.Threshold1])
         {
-            _playerRenderer.flipX = false;
+            _renderer.flipX = false;
         }
         if (_rodStrength > _rodStrengthThresholds[RodStrengths.Threshold1])
         {
-            _playerRenderer.flipX = true;
+            _renderer.flipX = true;
         }
         
     }
@@ -125,15 +122,11 @@ public class Player : MonoBehaviour
         _targetPosition = new Vector3(posX, transform.position.y, transform.position.z);
         if (_targetPosition.x < transform.position.x)
         {
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            _renderer.flipX = true;
         }
         else
         {
-            Vector3 scale = transform.localScale;
-            scale.x *= -1;
-            transform.localScale = scale;
+            _renderer.flipX = false;
         }
     }
 }
