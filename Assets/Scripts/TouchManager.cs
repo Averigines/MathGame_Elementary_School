@@ -18,14 +18,12 @@ public class TouchManager : MonoBehaviour
     
     private void OnTap()
     {
-        print("Tapping");
-        if (Touchscreen.current != null && StateManager.ValidStatesForMoving.Contains(StateManager.CurrPlayerState))
+        if (Touchscreen.current != null && player.ValidStatesForMoving.Contains(player.CurrPlayerState))
         {
             TouchControl touch = Touchscreen.current.primaryTouch;
             Vector2 touchPos = touch.position.ReadValue();
             Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
-
-            StateManager.ChangePlayerState(StateManager.PlayerState.Moving);
+            
             player.SetTargetPosition(worldPoint.x);
         }
         
@@ -50,11 +48,10 @@ public class TouchManager : MonoBehaviour
 
     private void OnDefineThrowStrength()
     {
-        if (Touchscreen.current != null && StateManager.CurrPlayerState != StateManager.PlayerState.Fishing)
+        if (Touchscreen.current != null && player.CurrPlayerState != Player.PlayerState.Fishing)
         {
-            if (StateManager.CurrPlayerState != StateManager.PlayerState.AdjustingRodStrength)
+            if (player.CurrPlayerState != Player.PlayerState.AdjustingRodStrength)
             {
-                StateManager.ChangePlayerState(StateManager.PlayerState.AdjustingRodStrength);
                 player.StartRodUse();
             }
             
@@ -67,7 +64,6 @@ public class TouchManager : MonoBehaviour
 
     private void OnPress()
     {
-        print("Pressing");
         if (Touchscreen.current != null)
         {
             
@@ -76,9 +72,7 @@ public class TouchManager : MonoBehaviour
 
     private void OnReleasePress()
     {
-        print("Releasing");
-        print("State on Release: " + StateManager.CurrPlayerState);
-        if (Touchscreen.current != null && StateManager.CurrPlayerState == StateManager.PlayerState.AdjustingRodStrength)
+        if (Touchscreen.current != null && player.CurrPlayerState == Player.PlayerState.AdjustingRodStrength)
         {
             player.ReleaseRod();
         }

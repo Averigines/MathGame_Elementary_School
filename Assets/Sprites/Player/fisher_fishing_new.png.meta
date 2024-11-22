@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: ce79bd6cb7b2eb249b3e7b45d5bbfc3e
+guid: 407d46ccd987c63458b3a1d5b830bea0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4548796474974412338
-    second: Boat_0
+      213: -3927650925116645988
+    second: fisher_fishing_new_0
+  - first:
+      213: 743867520447667847
+    second: fisher_fishing_new_1
+  - first:
+      213: 2626570409927339195
+    second: fisher_fishing_new_2
+  - first:
+      213: -3723991858915121979
+    second: fisher_fishing_new_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Boat_0
+      name: fisher_fishing_new_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 74
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 2
+        y: 1
+        width: 104
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec1e991e4bd6fd0c0800000000000000
-      internalID: -4548796474974412338
+      spriteID: c9d10be0b4e2e79c0800000000000000
+      internalID: -3927650925116645988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_fishing_new_1
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 1
+        width: 104
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78edb34919fb25a00800000000000000
+      internalID: 743867520447667847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_fishing_new_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 1
+        width: 104
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbc65452fd3737420800000000000000
+      internalID: 2626570409927339195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_fishing_new_3
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 1
+        width: 104
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4eae68229b15cc0800000000000000
+      internalID: -3723991858915121979
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 278db4b1b11a5f64a83d231494764f96
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Boat_0: -4548796474974412338
+      fisher_fishing_new_0: -3927650925116645988
+      fisher_fishing_new_1: 743867520447667847
+      fisher_fishing_new_2: 2626570409927339195
+      fisher_fishing_new_3: -3723991858915121979
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

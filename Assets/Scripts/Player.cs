@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using Unity.Mathematics.Geometry;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private SpriteRenderer _renderer;
+    private Animator _animator;
 
     [Header("Rod Strength Thresholds in Percent of the Total Screen Width normalized")]
     [Range(0, 1)][SerializeField] private float rodStrengthThreshold1;
@@ -23,9 +25,23 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float speed = 2;
     private Vector3 _targetPosition;
+    
+    public enum PlayerState
+    {
+        Idle,
+        AdjustingRodStrength,
+        Fishing,
+        Moving,
+    }
+
+    public PlayerState CurrPlayerState {get; private set;}
+    public PlayerState[] ValidStatesForMoving {get; private set;}
 
     void Start()
     {
+        ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving };
+        CurrPlayerState = PlayerState.Idle;
+
         _rodStrengthThresholds = new Dictionary<RodStrengths, float>
         {
             { RodStrengths.Threshold1, rodStrengthThreshold1 },
@@ -36,11 +52,12 @@ public class Player : MonoBehaviour
         _targetPosition = transform.position;
 
         _renderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
     
     void Update()
     {
-        if (StateManager.CurrPlayerState == StateManager.PlayerState.Moving)
+        if (CurrPlayerState == PlayerState.Moving)
         {
             var currPos = transform.position;
             Vector3 direction = (_targetPosition - currPos).normalized;
@@ -50,6 +67,7 @@ public class Player : MonoBehaviour
     
     public void StartRodUse()
     {
+        ChangePlayerState(PlayerState.AdjustingRodStrength);
         _rodStrength = 0;
     }
 
@@ -70,28 +88,27 @@ public class Player : MonoBehaviour
     
     public void ReleaseRod()
     {
-        print(_rodStrength);
         if (Mathf.Abs(_rodStrength) < _rodStrengthThresholds[RodStrengths.Threshold1])
         {
-            StateManager.ChangePlayerState(StateManager.PlayerState.Idle);
+            ChangePlayerState(PlayerState.Idle);
         }
         // Add logic for throwing the line on every else if
         else if (Mathf.Abs(_rodStrength) < _rodStrengthThresholds[RodStrengths.Threshold2])
         {
             //For now Idle, should be fishing when implemented
-            StateManager.ChangePlayerState(StateManager.PlayerState.Idle);
+            ChangePlayerState(PlayerState.Idle);
             //StateManager.ChangePlayerState(StateManager.PlayerState.Fishing);
         }
         else if (Mathf.Abs(_rodStrength) < _rodStrengthThresholds[RodStrengths.Threshold3])
         {
             //For now Idle, should be fishing when implemented
-            StateManager.ChangePlayerState(StateManager.PlayerState.Idle);
+            ChangePlayerState(PlayerState.Idle);
             //StateManager.ChangePlayerState(StateManager.PlayerState.Fishing);
         }
         else
         {
             //For now Idle, should be fishing when implemented
-            StateManager.ChangePlayerState(StateManager.PlayerState.Idle);
+            ChangePlayerState(PlayerState.Idle);
             //StateManager.ChangePlayerState(StateManager.PlayerState.Fishing);
         }
         
@@ -106,19 +123,18 @@ public class Player : MonoBehaviour
         if (step >= distanceToTarget)
         {
             transform.position = _targetPosition;
-            StateManager.ChangePlayerState(StateManager.PlayerState.Idle);
+            ChangePlayerState(PlayerState.Idle);
         }
         else
         {
-            var currPos = transform.position;
             transform.Translate(direction * speed * Time.deltaTime);
-            var newPos = transform.position;
-            print(newPos - currPos);
         }
     }
 
     public void SetTargetPosition(float posX)
     {
+        if (CurrPlayerState != PlayerState.Moving) ChangePlayerState(PlayerState.Moving);
+        
         _targetPosition = new Vector3(posX, transform.position.y, transform.position.z);
         if (_targetPosition.x < transform.position.x)
         {
@@ -127,6 +143,35 @@ public class Player : MonoBehaviour
         else
         {
             _renderer.flipX = false;
+        }
+    }
+    
+    private void ChangePlayerState(PlayerState state)
+    {
+        CurrPlayerState = state;
+        print(CurrPlayerState);
+
+        _animator.ResetTrigger("Idle");
+        _animator.ResetTrigger("Rowing");
+        
+        //Change to correct animations when implemented
+        switch (CurrPlayerState)
+        {
+            case PlayerState.Idle:
+                _animator.SetTrigger("Idle");
+                break;
+            case PlayerState.Moving:
+                _animator.SetTrigger("Rowing");
+                break;
+            case PlayerState.Fishing:
+                _animator.SetTrigger("Idle");
+                break;
+            case PlayerState.AdjustingRodStrength:
+                _animator.SetTrigger("Idle");
+                break;
+            default:
+                _animator.SetTrigger("Idle");
+                break;
         }
     }
 }

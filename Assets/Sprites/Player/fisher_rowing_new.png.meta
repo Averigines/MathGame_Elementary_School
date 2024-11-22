@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 752c6457da12b844181868ad5c85dfda
+guid: 7b7a5c17687cc3d4a8788afd8b00953b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6007857137893288414
-    second: Sprite-0001_0
+      213: 8095153997186531375
+    second: fisher_rowing_new_0
+  - first:
+      213: 6015171736980067705
+    second: fisher_rowing_new_1
+  - first:
+      213: -1872948278129389631
+    second: fisher_rowing_new_2
+  - first:
+      213: -4375907129542652487
+    second: fisher_rowing_new_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sprite-0001_0
+      name: fisher_rowing_new_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 27
-        width: 89
-        height: 36
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 1, w: 1}
+        x: 2
+        y: 1
+        width: 78
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 226539a93cdcf9ca0800000000000000
-      internalID: -6007857137893288414
+      spriteID: c2da3a760b7c3834b8b0327dfb86ebe0
+      internalID: 8095153997186531375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_rowing_new_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 1
+        width: 78
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46cc7433e2aedb44e988bfd47fee6b93
+      internalID: 6015171736980067705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_rowing_new_2
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 1
+        width: 78
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ee68327d10a8d4eb9572f7dce00fb0
+      internalID: -1872948278129389631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fisher_rowing_new_3
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 1
+        width: 78
+        height: 33
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef8e605268a48fd46acb1fe2e2354d94
+      internalID: -4375907129542652487
       vertices: []
       indices: 
       edges: []
@@ -138,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1d179443f972c8c4f9bc8880654b0ea7
+    spriteID: 02e2e6b8073e5f94b8eddebdc6ebfbb2
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Sprite-0001_0: -6007857137893288414
+      fisher_rowing_new_0: 8095153997186531375
+      fisher_rowing_new_1: 6015171736980067705
+      fisher_rowing_new_2: -1872948278129389631
+      fisher_rowing_new_3: -4375907129542652487
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

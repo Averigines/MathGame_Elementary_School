@@ -50,7 +50,7 @@ public class ScreenManager : MonoBehaviour
     {
         Transform tf = player.transform;
         float posX = (ScreenData.seaArea.left + ScreenData.seaArea.right) / 2f;
-        float posY = ScreenData.seaArea.top + 0.6f;
+        float posY = ScreenData.seaArea.top - 0.35f;
         tf.position = new Vector3(posX, posY, tf.position.z);
     }
     
