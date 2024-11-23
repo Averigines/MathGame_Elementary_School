@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     public PlayerState CurrPlayerState {get; private set;}
     public PlayerState[] ValidStatesForMoving {get; private set;}
 
-    private bool _needsToTurnAfterMoving = false;
+    private bool _needsToTurnAfterMoving;
 
     void Start()
     {
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
         if (step >= distanceToTarget)
         {
             transform.position = _targetPosition;
-            if (_needsToTurnAfterMoving) _renderer.flipX = !_renderer.flipX;
+            if (_needsToTurnAfterMoving) FlipPlayerModel(!_renderer.flipX);
             ChangePlayerState(PlayerState.Idle);
         }
         else
@@ -139,40 +139,53 @@ public class Player : MonoBehaviour
     public void SetTargetPosition(float rodPos)
     {
         if (CurrPlayerState != PlayerState.Moving) ChangePlayerState(PlayerState.Moving);
-
-        float rodOffset;
+        
         bool needsToFlip;
         if (rodPos < transform.position.x - playerModel.transform.lossyScale.x / 2)
         {
             needsToFlip = true;
-            rodOffset = -fishingRod.transform.localPosition.x;
             _needsToTurnAfterMoving = false;
         }
         else if (rodPos > transform.position.x + playerModel.transform.lossyScale.x / 2)
         {
             needsToFlip = false;
-            rodOffset = fishingRod.transform.localPosition.x;
             _needsToTurnAfterMoving = false;
         }
         else if (rodPos < transform.position.x)
         {
             needsToFlip = false;
-            rodOffset = -fishingRod.transform.localPosition.x;
             _needsToTurnAfterMoving = true;
         }
         else
         {
             needsToFlip = true;
-            rodOffset = fishingRod.transform.localPosition.x;
             _needsToTurnAfterMoving = true;
         }
 
-        _renderer.flipX = needsToFlip;
+        FlipPlayerModel(needsToFlip);
+        AdjustRodPosition(needsToFlip);
+        float rodOffset = fishingRod.transform.localPosition.x;
 
         float targetParentX = rodPos - rodOffset;
         _targetPosition = new Vector3(targetParentX, transform.position.y, transform.position.z);
     }
-    
+
+    private void FlipPlayerModel(bool needsToBeFlipped)
+    {
+        _renderer.flipX = needsToBeFlipped;
+        
+        
+    }
+
+    private void AdjustRodPosition(bool needsToBeFlipped)
+    {
+        var fishingRodPosAbs = Mathf.Abs(fishingRod.transform.localPosition.x);
+        fishingRod.transform.localPosition = _renderer.flipX ? new Vector3(-fishingRodPosAbs, fishingRod.transform.localPosition.y, fishingRod.transform.localPosition.z) : new Vector3(fishingRodPosAbs, fishingRod.transform.localPosition.y, fishingRod.transform.localPosition.z);
+        if (_needsToTurnAfterMoving)
+            fishingRod.transform.localPosition = new Vector3(-fishingRod.transform.localPosition.x, fishingRod.transform.localPosition.y,
+                fishingRod.transform.localPosition.z);
+    }
+
     private void ChangePlayerState(PlayerState state)
     {
         CurrPlayerState = state;
