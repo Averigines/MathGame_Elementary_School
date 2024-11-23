@@ -14,32 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   goalNumber: 10
-  timeLimit: 0
   availableFish:
   - type: 0
     amount: 5
-    spawnPos: {x: 10, y: 10}
+    swimEdgeLeft: 0
+    swimEdgeRight: 10
+    spawnPosY: 70
     speedX: 0.6
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   - type: 0
     amount: 2
-    spawnPos: {x: 50, y: 30}
+    swimEdgeLeft: 40
+    swimEdgeRight: 80
+    spawnPosY: 40
     speedX: 1
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   - type: 0
     amount: 4
-    spawnPos: {x: 70, y: 50}
+    swimEdgeLeft: 30
+    swimEdgeRight: 50
+    spawnPosY: 20
     speedX: 0.8
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   - type: 0
     amount: 1
-    spawnPos: {x: 30, y: 70}
+    swimEdgeLeft: 80
+    swimEdgeRight: 100
+    spawnPosY: 50
     speedX: 0.7
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   - type: 0
     amount: 1
-    spawnPos: {x: 80, y: 90}
+    swimEdgeLeft: 20
+    swimEdgeRight: 60
+    spawnPosY: 90
     speedX: 0.5
     sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   allowNegativeNumbers: 0
   includeMultiplication: 0
+  timeLimit: 0

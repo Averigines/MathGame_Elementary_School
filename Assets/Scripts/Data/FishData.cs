@@ -14,7 +14,9 @@ public class FishData
 {
     public FishType type;
     public int amount;
-    public Vector2 spawnPos; //in percent from left/top
+    public float swimEdgeLeft; //in percent
+    public float swimEdgeRight; //in percent
+    public float spawnPosY; //in percent from top
     public float speedX;
     public Sprite sprite;
 }

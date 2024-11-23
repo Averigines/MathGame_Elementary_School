@@ -1408,8 +1408,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seaHeight: 0.7
-  fishSpaceToWaterEdgeX: 0.4
-  fishSpaceToWaterEdgeY: 0.4
+  fishSpaceToWaterEdgeX: 1
+  fishSpaceToWaterEdgeY: 1
 --- !u!114 &2094450852
 MonoBehaviour:
   m_ObjectHideFlags: 0

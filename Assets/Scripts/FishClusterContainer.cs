@@ -12,7 +12,7 @@ public class FishClusterContainer : MonoBehaviour
     private int _value;
     private FishType _type;
     private float _radius = 0.4f;
-    private float _startPosY;
+    private Vector2 _fishAreaX;
 
     private struct YRange
     {
@@ -24,10 +24,9 @@ public class FishClusterContainer : MonoBehaviour
     public delegate void OnFishReeledIn(int points);
     public event OnFishReeledIn onFishReeledIn;
 
-    public void Initialize(FishData fishData, GameObject fishPrefab, float startPosY, DirectionX directionX, DirectionY directionY)
+    public void Initialize(FishData fishData, GameObject fishPrefab, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
     {
         _fishInContainer = new List<Fish>();
-        _startPosY = startPosY;
         _directionX = directionX;
         _directionY = directionY;
         _speedX = fishData.speedX;
@@ -36,6 +35,7 @@ public class FishClusterContainer : MonoBehaviour
 
         _yRange.max = startPosY + 0.2f;
         _yRange.min = startPosY - 0.2f;
+        _fishAreaX = fishAreaX;
 
         int fishPlaced = 0;
         int ringIndex = 0;
@@ -107,7 +107,7 @@ public class FishClusterContainer : MonoBehaviour
 
         transform.position = newPosition;
 
-        if (ScreenData.CheckIfFishClusterNeedsToTurn(_directionX, transform.position))
+        if (ScreenData.CheckIfFishClusterNeedsToTurn(_directionX, transform.position, _fishAreaX))
         {
             _directionX = _directionX == DirectionX.Left ? DirectionX.Right : DirectionX.Left;
             foreach (var fish in _fishInContainer)

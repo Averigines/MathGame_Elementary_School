@@ -6,8 +6,8 @@ public class ScreenData : MonoBehaviour
 {
     [SerializeField] private float seaHeight = 0.7f;
 
-    [SerializeField] private float fishSpaceToWaterEdgeX = 0.4f;
-    [SerializeField] private float fishSpaceToWaterEdgeY = 0.4f;
+    [SerializeField] private float fishSpaceToWaterEdgeX = 1f;
+    [SerializeField] private float fishSpaceToWaterEdgeY = 1f;
 
     public struct ScreenArea
     {
@@ -63,29 +63,7 @@ public class ScreenData : MonoBehaviour
         CalculateBackgroundArea();
         CalculateFishArea();
     }
-
-    private void CalculateBackgroundArea()
-    {
-        backgroundArea.left = screenArea.left;
-        backgroundArea.right = screenArea.right;
-        backgroundArea.width = backgroundArea.right - backgroundArea.left;
-        
-        backgroundArea.bottom = seaArea.top;
-        backgroundArea.top = screenArea.top;
-        backgroundArea.height = backgroundArea.top - backgroundArea.bottom;
-        
-    }
-
-    private void CalculateSeaArea()
-    {
-        seaArea.bottom = screenArea.bottom;
-        seaArea.top = screenArea.bottom + seaHeight * screenArea.height;
-        seaArea.left = screenArea.left;
-        seaArea.right = screenArea.right;
-        seaArea.height = seaArea.top - seaArea.bottom;
-        seaArea.width = seaArea.right - seaArea.left;
-    }
-
+    
     private void CalculateScreenArea()
     {
         Vector3 bottomLeft = _mainCamera.ViewportToWorldPoint(new Vector3(0, 0, _mainCamera.nearClipPlane));
@@ -97,6 +75,28 @@ public class ScreenData : MonoBehaviour
         screenArea.right = topRight.x;
         screenArea.height = screenArea.top - screenArea.bottom;
         screenArea.width = screenArea.right - screenArea.left;
+    }
+    
+    private void CalculateSeaArea()
+    {
+        seaArea.bottom = screenArea.bottom;
+        seaArea.top = screenArea.bottom + seaHeight * screenArea.height;
+        seaArea.left = screenArea.left;
+        seaArea.right = screenArea.right;
+        seaArea.height = seaArea.top - seaArea.bottom;
+        seaArea.width = seaArea.right - seaArea.left;
+    }
+
+    private void CalculateBackgroundArea()
+    {
+        backgroundArea.left = screenArea.left;
+        backgroundArea.right = screenArea.right;
+        backgroundArea.width = backgroundArea.right - backgroundArea.left;
+        
+        backgroundArea.bottom = seaArea.top;
+        backgroundArea.top = screenArea.top;
+        backgroundArea.height = backgroundArea.top - backgroundArea.bottom;
+        
     }
 
     private void CalculateFishArea()
@@ -129,19 +129,29 @@ public class ScreenData : MonoBehaviour
         return Random.Range(0, 2) == 0;
     }
 
-    public static Vector2 GetFishSpawnPos(Vector2 posInPercent)
+    public static Vector2 GetFishAreaX(float left, float right)
     {
-        float spawnPositionX = fishArea.left + (posInPercent.x / 100f) * (fishArea.right - fishArea.left);
-        float spawnPositionY = fishArea.top + (posInPercent.y / 100f) * (fishArea.bottom - fishArea.top);
+        Vector2 fishAreaX = new Vector2(fishArea.left + (left / 100f) * (fishArea.right - fishArea.left),
+            fishArea.left + (right / 100f) * (fishArea.right - fishArea.left));
+
+        return fishAreaX;
+    }
+    
+    public static Vector2 GetFishSpawnPos(float posInPercentY, Vector2 fishAreaX)
+    {
+        float spawnPositionX = Random.Range(fishAreaX.x, fishAreaX.y);
+        float spawnPositionY = fishArea.top + (posInPercentY / 100f) * (fishArea.bottom - fishArea.top);
         Vector2 spawnPosition = new Vector2(spawnPositionX, spawnPositionY);
 
         return spawnPosition;
     }
 
-    public static bool CheckIfFishClusterNeedsToTurn(DirectionX currDirectionX, Vector3 pos)
+    public static bool CheckIfFishClusterNeedsToTurn(DirectionX currDirectionX, Vector3 pos, Vector2 fishAreaX)
     {
-        if (pos.x < fishArea.left && currDirectionX == DirectionX.Left) return true;
-        if (pos.x > fishArea.right && currDirectionX == DirectionX.Right) return true;
+        if (pos.x < fishAreaX.x && currDirectionX == DirectionX.Left) return true;
+        if (pos.x > fishAreaX.y && currDirectionX == DirectionX.Right) return true;
         return false;
     }
+
+    
 }
