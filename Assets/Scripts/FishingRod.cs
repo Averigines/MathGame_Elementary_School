@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class FishingRod : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AdjustRodPosition(bool needsToBeFlipped)
     {
-        
+        var localPos = transform.localPosition;
+        var fishingRodPosAbs = Mathf.Abs(localPos.x);
+        transform.localPosition = needsToBeFlipped ? new Vector3(-fishingRodPosAbs, localPos.y, localPos.z) : new Vector3(fishingRodPosAbs, localPos.y, localPos.z);
     }
 }
