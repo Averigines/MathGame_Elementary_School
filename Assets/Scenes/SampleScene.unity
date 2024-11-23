@@ -196,7 +196,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: -3927650925116645988, guid: 407d46ccd987c63458b3a1d5b830bea0, type: 3}
+  m_Sprite: {fileID: 3390290538466982040, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -382,9 +382,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerModel: {fileID: 119861219}
   fishingRod: {fileID: 810807532}
-  rodStrengthThreshold1: 0.1
-  rodStrengthThreshold2: 0.2
-  rodStrengthThreshold3: 0.3
   speed: 2
   fishingRodHookPrefab: {fileID: 4687320725964454341, guid: e832f6ea3c06bd94dbe630ae6b35e943, type: 3}
 --- !u!4 &500060083
