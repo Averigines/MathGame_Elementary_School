@@ -128,11 +128,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119861220}
-  - component: {fileID: 119861221}
   - component: {fileID: 119861222}
   - component: {fileID: 119861223}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,29 +145,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119861219}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 500060083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &119861221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 119861219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a180f0bd6bc37943880dad1678ed32a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rodStrengthThreshold1: 0.1
-  rodStrengthThreshold2: 0.2
-  rodStrengthThreshold3: 0.3
-  speed: 2
 --- !u!212 &119861222
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -367,6 +350,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1628247284}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &500060081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500060083}
+  - component: {fileID: 500060082}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500060082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500060081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a180f0bd6bc37943880dad1678ed32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerModel: {fileID: 119861219}
+  fishingRod: {fileID: 810807532}
+  rodStrengthThreshold1: 0.1
+  rodStrengthThreshold2: 0.2
+  rodStrengthThreshold3: 0.3
+  speed: 2
+--- !u!4 &500060083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500060081}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 119861220}
+  - {fileID: 810807533}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -717,6 +752,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &810807532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 810807533}
+  m_Layer: 0
+  m_Name: FishingRod
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &810807533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810807532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.47, y: 0.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 500060083}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &900062932
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2913193e1d9bf7f42b61629f052996f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 119861221}
+  player: {fileID: 500060082}
 --- !u!4 &1035815694
 Transform:
   m_ObjectHideFlags: 0
@@ -1356,7 +1422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   water: {fileID: 1494144385}
   waterDistortion: {fileID: 1585529200}
-  player: {fileID: 119861219}
+  player: {fileID: 500060081}
   background: {fileID: 900062932}
   backgroundReflection: {fileID: 455323422}
   reflectionTexture: {fileID: 8400000, guid: d13df801a23c0f84e99fd4d2e90e550f, type: 2}
@@ -1382,6 +1448,6 @@ SceneRoots:
   - {fileID: 2094450849}
   - {fileID: 1035815694}
   - {fileID: 282017465}
-  - {fileID: 119861220}
   - {fileID: 1332269160}
   - {fileID: 1628247284}
+  - {fileID: 500060083}
