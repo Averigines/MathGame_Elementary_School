@@ -381,11 +381,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerModel: {fileID: 119861219}
-  fishingRod: {fileID: 810807534}
+  fishingRod: {fileID: 810807532}
   rodStrengthThreshold1: 0.1
   rodStrengthThreshold2: 0.2
   rodStrengthThreshold3: 0.3
   speed: 2
+  fishingRodHookPrefab: {fileID: 4687320725964454341, guid: e832f6ea3c06bd94dbe630ae6b35e943, type: 3}
 --- !u!4 &500060083
 Transform:
   m_ObjectHideFlags: 0
@@ -761,7 +762,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 810807533}
-  - component: {fileID: 810807534}
   m_Layer: 0
   m_Name: FishingRod
   m_TagString: Untagged
@@ -784,18 +784,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 500060083}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &810807534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 810807532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eae6688f77f154e4d84ef8f0acf3ad46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &900062932
 GameObject:
   m_ObjectHideFlags: 0

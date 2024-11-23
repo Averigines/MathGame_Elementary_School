@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private SpriteRenderer _renderer;
     private Animator _animator;
     [SerializeField] private GameObject playerModel;
-    [SerializeField] private FishingRod fishingRod;
+    [SerializeField] private GameObject fishingRod;
     
     [Header("Rod Strength Thresholds in Percent of the Total Screen Width normalized")]
     [Range(0, 1)][SerializeField] private float rodStrengthThreshold1;
@@ -40,10 +40,13 @@ public class Player : MonoBehaviour
     public PlayerState[] ValidStatesForMoving {get; private set;}
 
     private bool _needsToTurnAfterMoving;
+    
+    [SerializeField] private GameObject fishingRodHookPrefab;
+    private GameObject _activeFishingHook;
 
     void Start()
     {
-        ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving };
+        ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving, PlayerState.Fishing };
         CurrPlayerState = PlayerState.Idle;
 
         _rodStrengthThresholds = new Dictionary<RodStrengths, float>
@@ -128,7 +131,7 @@ public class Player : MonoBehaviour
         {
             transform.position = _targetPosition;
             if (_needsToTurnAfterMoving) FlipPlayerModel(!_renderer.flipX);
-            ChangePlayerState(PlayerState.Idle);
+            ChangePlayerState(PlayerState.Fishing);
         }
         else
         {
@@ -165,7 +168,7 @@ public class Player : MonoBehaviour
         FlipPlayerModel(needsToFlip);
         
         bool fishingRodFlipped = _needsToTurnAfterMoving ? !needsToFlip : needsToFlip;
-        fishingRod.AdjustRodPosition(fishingRodFlipped);
+        AdjustRodPosition(fishingRodFlipped);
         
         float rodOffset = fishingRod.transform.localPosition.x;
 
@@ -177,15 +180,49 @@ public class Player : MonoBehaviour
     {
         _renderer.flipX = needsToBeFlipped;
     }
+    
+    private void AdjustRodPosition(bool needsToBeFlipped)
+    {
+        var localPos = fishingRod.transform.localPosition;
+        var fishingRodPosAbs = Mathf.Abs(localPos.x);
+        fishingRod.transform.localPosition = needsToBeFlipped ? new Vector3(-fishingRodPosAbs, localPos.y, localPos.z) : new Vector3(fishingRodPosAbs, localPos.y, localPos.z);
+    }
+    
+    private void StartFishing()
+    {
+        var go = Instantiate(fishingRodHookPrefab, fishingRod.transform);
+        _activeFishingHook = go;
+    }
 
+    private void StopFishing()
+    {
+        Destroy(_activeFishingHook);
+    }
+    
     private void ChangePlayerState(PlayerState state)
     {
+        if (state == CurrPlayerState) return;
+        
+        switch (CurrPlayerState)
+        {
+            case PlayerState.Idle:
+                break;
+            case PlayerState.Moving:
+                break;
+            case PlayerState.Fishing:
+                StopFishing();
+                break;
+            case PlayerState.AdjustingRodStrength:
+                break;
+            default:
+                break;
+        }
+        
         CurrPlayerState = state;
-        print(CurrPlayerState);
 
         _animator.ResetTrigger("Idle");
         _animator.ResetTrigger("Rowing");
-        
+
         //Change to correct animations when implemented
         switch (CurrPlayerState)
         {
@@ -197,6 +234,7 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.Fishing:
                 _animator.SetTrigger("Idle");
+                StartFishing();
                 break;
             case PlayerState.AdjustingRodStrength:
                 _animator.SetTrigger("Idle");
