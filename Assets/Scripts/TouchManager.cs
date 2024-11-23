@@ -29,11 +29,35 @@ public class TouchManager : MonoBehaviour
         {
             player.SetTargetPosition(worldPoint.x);
         }
+    }
+
+    private void OnPress()
+    {
+        if (Touchscreen.current == null) return;
         
-        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
-                 player.CurrPlayerState == Player.PlayerState.Fishing)
+        TouchControl touch = Touchscreen.current.primaryTouch;
+        Vector2 touchPos = touch.position.ReadValue();
+        Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
+        
+        if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+            player.CurrPlayerState == Player.PlayerState.Fishing)
         {
-            player.BoostFishingRodSpeed();
+            player.StartAcceleratingFishingRod();
+        }
+    }
+
+    private void OnReleasePress()
+    {
+        if (Touchscreen.current == null) return;
+        
+        TouchControl touch = Touchscreen.current.primaryTouch;
+        Vector2 touchPos = touch.position.ReadValue();
+        Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
+        
+        if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+            player.CurrPlayerState == Player.PlayerState.Fishing)
+        {
+            player.StartDeceleratingFishingRod();
         }
     }
 }

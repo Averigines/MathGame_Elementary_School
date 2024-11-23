@@ -127,10 +127,15 @@ public class Player : MonoBehaviour
     {
         Destroy(_activeFishingHook.gameObject);
     }
-    
-    public void BoostFishingRodSpeed()
+
+    public void StartAcceleratingFishingRod()
     {
         _activeFishingHook.AccelerateHook();
+    }
+    
+    public void StartDeceleratingFishingRod()
+    {
+        _activeFishingHook.DecelerateHook();
     }
     
     public void ChangePlayerState(PlayerState state)

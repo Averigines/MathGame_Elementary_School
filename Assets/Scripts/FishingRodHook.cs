@@ -9,11 +9,8 @@ public class FishingRodHook : MonoBehaviour
     [SerializeField] private float baseSpeed = 2f;
     [SerializeField] private float maxSpeed = 10f;
     private float _currSpeed;
-    [SerializeField] private float accelerationPerTap = 1f;
-    [SerializeField] private float timeUntilDecelerate = 1f;
-    private List<float> _accelerationTimeStamps;
-
-    private CircleCollider2D _collider;
+    [SerializeField] private float accelerationRate = 20f;
+    private bool _isAccelerating = false;
 
     private enum HookDirection
     {
@@ -30,9 +27,7 @@ public class FishingRodHook : MonoBehaviour
     private void Start()
     {
         _currHookDirection = HookDirection.Down;
-        _collider = GetComponent<CircleCollider2D>();
         _currSpeed = baseSpeed;
-        _accelerationTimeStamps = new List<float>();
     }
 
     public void Initialize(float minDepth, float maxDepth)
@@ -44,8 +39,15 @@ public class FishingRodHook : MonoBehaviour
 
     private void Update()
     {
-        CheckForDeceleratingHook();
-
+        if (_isAccelerating)
+        {
+            _currSpeed = Mathf.Min(_currSpeed + accelerationRate * Time.deltaTime, maxSpeed);
+        }
+        else
+        {
+            _currSpeed = Mathf.Max(_currSpeed - accelerationRate * Time.deltaTime, baseSpeed);
+        }
+        
         transform.Translate(_hookDirectionMap[_currHookDirection] * _currSpeed * Time.deltaTime);
         if (transform.position.y <= _maxDepth) _currHookDirection = HookDirection.Up;
         if (transform.position.y >= _minDepth) _currHookDirection = HookDirection.Down;
@@ -53,25 +55,12 @@ public class FishingRodHook : MonoBehaviour
 
     public void AccelerateHook()
     {
-        if (_currSpeed < maxSpeed) _accelerationTimeStamps.Add(Time.time);
-        _currSpeed = Mathf.Max(_currSpeed + accelerationPerTap, maxSpeed);
+        _isAccelerating = true;
     }
     
-    private void CheckForDeceleratingHook()
+    public void DecelerateHook()
     {
-        for (int i = _accelerationTimeStamps.Count - 1; i >= 0; i--)
-        {
-            if (Time.time - _accelerationTimeStamps[i] > timeUntilDecelerate)
-            {
-                DecelerateHook();
-                _accelerationTimeStamps.RemoveAt(i);
-            }
-        }
-    }
-
-    private void DecelerateHook()
-    {
-        _currSpeed = Mathf.Min(_currSpeed - accelerationPerTap, baseSpeed);
+        _isAccelerating = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
