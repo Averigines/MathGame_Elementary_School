@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private bool _needsToTurnAfterMoving;
     
     [SerializeField] private GameObject fishingRodHookPrefab;
-    private GameObject _activeFishingHook;
+    private FishingRodHook _activeFishingHook;
 
     void Start()
     {
@@ -191,15 +191,18 @@ public class Player : MonoBehaviour
     private void StartFishing()
     {
         var go = Instantiate(fishingRodHookPrefab, fishingRod.transform);
-        _activeFishingHook = go;
+        var minFishingHookDepth = ScreenData.seaArea.top;
+        var maxFishingHookDepth = ScreenData.seaArea.bottom;
+        _activeFishingHook = go.GetComponent<FishingRodHook>();
+        _activeFishingHook.Initialize(minFishingHookDepth, maxFishingHookDepth);
     }
 
     private void StopFishing()
     {
-        Destroy(_activeFishingHook);
+        Destroy(_activeFishingHook.gameObject);
     }
     
-    private void ChangePlayerState(PlayerState state)
+    public void ChangePlayerState(PlayerState state)
     {
         if (state == CurrPlayerState) return;
         

@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour
     public LevelData currentLevelData;
 
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Player player;
     [SerializeField] private GameObject fishClusterContainerPrefab;
     [SerializeField] private GameObject fishPrefab;
 
@@ -43,8 +44,13 @@ public class LevelManager : MonoBehaviour
         
         var fishCluster = go.GetComponent<FishClusterContainer>();
         fishCluster.Initialize(fishData, fishPrefab, startPos.y, directionX, directionY);
-        fishCluster.onFishReeledIn += IncreasePoints;
+        fishCluster.onFishReeledIn += HandleFishReeledIn;
+    }
 
+    private void HandleFishReeledIn(int points)
+    {
+        IncreasePoints(points);
+        player.ChangePlayerState(Player.PlayerState.Idle);
     }
 
     private void IncreasePoints(int points)
