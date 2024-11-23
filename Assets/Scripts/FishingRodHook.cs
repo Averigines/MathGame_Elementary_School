@@ -6,7 +6,12 @@ public class FishingRodHook : MonoBehaviour
 {
     private float _maxDepth;
     private float _minDepth;
-    [SerializeField] private float speed = 2;
+    [SerializeField] private float baseSpeed = 2f;
+    [SerializeField] private float maxSpeed = 10f;
+    private float _currSpeed;
+    [SerializeField] private float accelerationPerTap = 1f;
+    [SerializeField] private float timeUntilDecelerate = 1f;
+    private List<float> _accelerationTimeStamps;
 
     private CircleCollider2D _collider;
 
@@ -26,6 +31,8 @@ public class FishingRodHook : MonoBehaviour
     {
         _currHookDirection = HookDirection.Down;
         _collider = GetComponent<CircleCollider2D>();
+        _currSpeed = baseSpeed;
+        _accelerationTimeStamps = new List<float>();
     }
 
     public void Initialize(float minDepth, float maxDepth)
@@ -37,9 +44,34 @@ public class FishingRodHook : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(_hookDirectionMap[_currHookDirection] * speed * Time.deltaTime);
+        CheckForDeceleratingHook();
+
+        transform.Translate(_hookDirectionMap[_currHookDirection] * _currSpeed * Time.deltaTime);
         if (transform.position.y <= _maxDepth) _currHookDirection = HookDirection.Up;
         if (transform.position.y >= _minDepth) _currHookDirection = HookDirection.Down;
+    }
+
+    public void AccelerateHook()
+    {
+        if (_currSpeed < maxSpeed) _accelerationTimeStamps.Add(Time.time);
+        _currSpeed = Mathf.Max(_currSpeed + accelerationPerTap, maxSpeed);
+    }
+    
+    private void CheckForDeceleratingHook()
+    {
+        for (int i = _accelerationTimeStamps.Count - 1; i >= 0; i--)
+        {
+            if (Time.time - _accelerationTimeStamps[i] > timeUntilDecelerate)
+            {
+                DecelerateHook();
+                _accelerationTimeStamps.RemoveAt(i);
+            }
+        }
+    }
+
+    private void DecelerateHook()
+    {
+        _currSpeed = Mathf.Min(_currSpeed - accelerationPerTap, baseSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

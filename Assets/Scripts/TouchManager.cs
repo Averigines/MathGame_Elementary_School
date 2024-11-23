@@ -18,15 +18,22 @@ public class TouchManager : MonoBehaviour
     
     private void OnTap()
     {
-        if (Touchscreen.current != null && player.ValidStatesForMoving.Contains(player.CurrPlayerState))
+        if (Touchscreen.current == null) return;
+        
+        TouchControl touch = Touchscreen.current.primaryTouch;
+        Vector2 touchPos = touch.position.ReadValue();
+        Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
+
+        if (worldPoint.y < ScreenData.backgroundArea.top && worldPoint.y > ScreenData.backgroundArea.bottom &&
+            player.ValidStatesForMoving.Contains(player.CurrPlayerState))
         {
-            TouchControl touch = Touchscreen.current.primaryTouch;
-            Vector2 touchPos = touch.position.ReadValue();
-            Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
-            
-            
-            
             player.SetTargetPosition(worldPoint.x);
+        }
+        
+        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+                 player.CurrPlayerState == Player.PlayerState.Fishing)
+        {
+            player.BoostFishingRodSpeed();
         }
     }
 }
