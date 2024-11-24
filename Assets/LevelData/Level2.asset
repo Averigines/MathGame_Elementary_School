@@ -50,13 +50,6 @@ MonoBehaviour:
     spawnPosY: 15
     speedX: 0.8
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
-  - type: 0
-    amount: 0
-    swimEdgeLeft: 0
-    swimEdgeRight: 0
-    spawnPosY: 0
-    speedX: 0
-    prefab: {fileID: 0}
   allowNegativeNumbers: 0
   includeMultiplication: 0
   timeLimit: 0

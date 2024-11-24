@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class FishClusterContainer : MonoBehaviour
@@ -21,6 +23,8 @@ public class FishClusterContainer : MonoBehaviour
     }
     private YRange _yRange;
 
+    [SerializeField] private Vector2 textOffset = new Vector2(0.3f, 0.3f);
+
     public delegate void OnFishReeledIn(FishType type ,int points);
     public event OnFishReeledIn onFishReeledIn;
 
@@ -37,6 +41,12 @@ public class FishClusterContainer : MonoBehaviour
         _yRange.min = startPosY - 0.2f;
         _fishAreaX = fishAreaX;
 
+        SpawnFishInContainer(fishData);
+        SetupValueText(textOffset);
+    }
+
+    private void SpawnFishInContainer(FishData fishData)
+    {
         int fishPlaced = 0;
         int ringIndex = 0;
 
@@ -67,6 +77,35 @@ public class FishClusterContainer : MonoBehaviour
             ringIndex++; // Move to the next ring
         }
     }
+    
+    private void SetupValueText(Vector2 offset)
+    {
+        Vector2 mostRightFishLocalPos = new Vector2(0, 0);
+        foreach (var fish in _fishInContainer)
+        {
+            if (fish.transform.localPosition.x + fish.transform.localPosition.y > mostRightFishLocalPos.x + mostRightFishLocalPos.y)
+            {
+                mostRightFishLocalPos = new Vector2(fish.transform.localPosition.x, fish.transform.localPosition.y);
+            }
+        }
+
+        Canvas canvasValue = GetComponentInChildren<Canvas>();
+        canvasValue.transform.localPosition = mostRightFishLocalPos + offset;
+        
+        TextMeshProUGUI textValue = GetComponentInChildren<TextMeshProUGUI>();
+        switch (_type)
+        {
+            case FishType.Addition:
+                textValue.text = "+" + _value;
+                textValue.color = Color.red;
+                break;
+            case FishType.Substraction:
+                textValue.text = "-" + _value;
+                textValue.color = Color.blue;
+                break;
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
