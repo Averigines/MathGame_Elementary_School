@@ -21,7 +21,7 @@ public class FishClusterContainer : MonoBehaviour
     }
     private YRange _yRange;
 
-    public delegate void OnFishReeledIn(int points);
+    public delegate void OnFishReeledIn(FishType type ,int points);
     public event OnFishReeledIn onFishReeledIn;
 
     public void Initialize(FishData fishData, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
@@ -122,7 +122,7 @@ public class FishClusterContainer : MonoBehaviour
 
     public void GetReeledIn()
     {
-        onFishReeledIn?.Invoke(_value);
+        onFishReeledIn?.Invoke(_type, _value);
         Destroy(gameObject);
     }
 }

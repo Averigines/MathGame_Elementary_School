@@ -1387,11 +1387,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 823146b8c182e4649b1c265c884de992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevelData: {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
+  currentLevelData: {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
   gameManager: {fileID: 2094450848}
   player: {fileID: 500060082}
   fishClusterContainerPrefab: {fileID: 2665306700835238679, guid: 3ec17fca3222b2c4681887b37f44cbe8, type: 3}
-  fishPrefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
 --- !u!114 &2094450851
 MonoBehaviour:
   m_ObjectHideFlags: 0

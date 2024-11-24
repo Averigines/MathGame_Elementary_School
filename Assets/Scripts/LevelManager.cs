@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -47,15 +48,34 @@ public class LevelManager : MonoBehaviour
         fishCluster.onFishReeledIn += HandleFishReeledIn;
     }
 
-    private void HandleFishReeledIn(int points)
+    private void HandleFishReeledIn(FishType type, int points)
     {
-        IncreasePoints(points);
+        switch (type)
+        {
+            case FishType.Addition:
+                IncreasePoints(points);
+                break;
+            case FishType.Substraction:
+                SubstractPoints(points);
+                break;
+            default:
+                break;
+        }
+        
         player.ChangePlayerState(Player.PlayerState.Idle);
     }
 
     private void IncreasePoints(int points)
     {
         _currPoints += points;
+        print(_currPoints);
+        
+        if (_currPoints == currentLevelData.goalNumber) print("WIN");
+    }
+    
+    private void SubstractPoints(int points)
+    {
+        _currPoints -= points;
         print(_currPoints);
         
         if (_currPoints == currentLevelData.goalNumber) print("WIN");
