@@ -23,19 +23,41 @@ public enum DirectionY
 
 public class GameManager : MonoBehaviour
 {
-    public LevelData[] allLevels;
+    [SerializeField] private LevelData[] allLevels;
+    [SerializeField] private LevelManager levelManager;
     private int _currentLevelIndex = 0;
 
-    public void LoadNextLevel()
+    private void OnEnable()
     {
-        
-    }
-    void Start()
-    {
-        
+        levelManager.onLevelCompleted += LoadNextLevel;
     }
 
-    void Update()
+    private void OnDisable()
     {
+        levelManager.onLevelCompleted -= LoadNextLevel;
+    }
+
+    void Start()
+    {
+        LoadFirstLevel();
+    }
+
+    private void LoadFirstLevel()
+    {
+        _currentLevelIndex = 0;
+        levelManager.InitializeLevel(allLevels[_currentLevelIndex]);
+    }
+    
+    private void LoadNextLevel()
+    {
+        if (_currentLevelIndex < allLevels.Length - 1)
+        {
+            _currentLevelIndex++;
+            levelManager.InitializeLevel(allLevels[_currentLevelIndex]);
+        }
+        else
+        {
+            Debug.Log("All levels completed!");
+        }
     }
 }

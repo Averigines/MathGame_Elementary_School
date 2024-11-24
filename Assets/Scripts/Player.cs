@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject fishingRod;
 
     [SerializeField] private float speed = 2;
+    private Vector3 _startPosition;
     private Vector3 _targetPosition;
     
     public enum PlayerState
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving, PlayerState.Fishing };
         CurrPlayerState = PlayerState.Idle;
 
+        _startPosition = transform.position;
         _targetPosition = transform.position;
 
         _renderer = playerModel.GetComponent<SpriteRenderer>();
@@ -136,6 +138,11 @@ public class Player : MonoBehaviour
     public void StartDeceleratingFishingRod()
     {
         _activeFishingHook.DecelerateHook();
+    }
+    
+    public void ResetPosition()
+    {
+        transform.position = _startPosition;
     }
     
     public void ChangePlayerState(PlayerState state)

@@ -1,35 +1,31 @@
+using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public LevelData currentLevelData;
-
-    [SerializeField] private GameManager gameManager;
+    private LevelData _currentLevelData;
+    
     [SerializeField] private Player player;
     [SerializeField] private GameObject fishClusterContainerPrefab;
 
     private int _currPoints;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        if (currentLevelData != null)
-        {
-            InitializeLevel();
-        }
-        else
-        {
-            Debug.LogError("No level data assigned!");
-        }
-    }
+    private List<GameObject> _fishClusters;
+    
+    public delegate void OnLevelCompleted();
+    public event OnLevelCompleted onLevelCompleted;
 
-    private void InitializeLevel()
+    public void InitializeLevel(LevelData levelData)
     {
-        Debug.Log($"Starting Level {currentLevelData.levelNumber}");
-        Debug.Log($"Goal Number: {currentLevelData.goalNumber}");
+        _fishClusters = new List<GameObject>();
+        _currPoints = 0;
+        
+        _currentLevelData = levelData;
+        Debug.Log($"Level {_currentLevelData.levelNumber}");
+        Debug.Log($"Goal Number: {_currentLevelData.goalNumber}");
 
-        // Spawn fish based on the level data
-        foreach (FishData fish in currentLevelData.availableFish)
+        foreach (FishData fish in _currentLevelData.availableFish)
         {
             SpawnFishCluster(fish);
         }
@@ -41,7 +37,9 @@ public class LevelManager : MonoBehaviour
         var startPos = ScreenData.GetFishSpawnPos(fishData.spawnPosY, fishAreaX);
         DirectionX directionX = ScreenData.CoinToss() ? DirectionX.Left : DirectionX.Right;
         DirectionY directionY = ScreenData.CoinToss() ? DirectionY.Up : DirectionY.Down;
+        
         GameObject go = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
+        _fishClusters.Add(go);
         
         var fishCluster = go.GetComponent<FishClusterContainer>();
         fishCluster.Initialize(fishData, startPos.y, fishAreaX, directionX, directionY);
@@ -69,21 +67,33 @@ public class LevelManager : MonoBehaviour
     {
         _currPoints += points;
         print(_currPoints);
-        
-        if (_currPoints == currentLevelData.goalNumber) print("WIN");
+
+        if (_currPoints == _currentLevelData.goalNumber)
+        {
+            CompleteLevel();
+        }
     }
-    
+
     private void SubstractPoints(int points)
     {
         _currPoints -= points;
         print(_currPoints);
-        
-        if (_currPoints == currentLevelData.goalNumber) print("WIN");
-    }
 
-    // Update is called once per frame
-    void Update()
+        if (_currPoints == _currentLevelData.goalNumber)
+        {
+            CompleteLevel();
+        }
+    }
+    
+    private void CompleteLevel()
     {
-        
+        foreach (var cluster in _fishClusters)
+        {
+            Destroy(cluster);
+        }
+
+        player.ResetPosition();
+        player.ChangePlayerState(Player.PlayerState.Idle);
+        onLevelCompleted?.Invoke();
     }
 }

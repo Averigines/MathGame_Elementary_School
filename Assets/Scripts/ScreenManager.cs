@@ -9,7 +9,8 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject backgroundReflection;
     [SerializeField] private RenderTexture reflectionTexture;
     [SerializeField] private Camera reflectionCamera;
-    void Start()
+    
+    void Awake()
     {
         SetWaterSize();
         SetWaterDistortionSize();
