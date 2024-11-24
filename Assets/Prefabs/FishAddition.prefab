@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8218731123074885574}
   - component: {fileID: 6754581696081804502}
   - component: {fileID: 2462420120525149228}
+  - component: {fileID: 2016751391919771035}
   m_Layer: 0
-  m_Name: Fish
+  m_Name: FishAddition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+  m_Sprite: {fileID: -3997850592389210174, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
   m_Color: {r: 0.8, g: 0.9, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.1659751, y: 0.13485476}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -100,3 +101,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7c5d3baa134d44c970ea4105cb1409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &2016751391919771035
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5291280172514582875}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f710ff6d2b9b76546a06518961d6df5a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

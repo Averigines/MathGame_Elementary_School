@@ -18,5 +18,5 @@ public class FishData
     public float swimEdgeRight; //in percent
     public float spawnPosY; //in percent from top
     public float speedX;
-    public Sprite sprite;
+    public GameObject prefab;
 }

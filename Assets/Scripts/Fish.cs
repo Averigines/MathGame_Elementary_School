@@ -3,10 +3,9 @@ using UnityEngine;
 public class Fish : MonoBehaviour
 {
     private SpriteRenderer _renderer;
-    public void Initialize(FishData fishData, DirectionX directionX)
+    public void Initialize(DirectionX directionX)
     {
         _renderer = GetComponent<SpriteRenderer>();
-        _renderer.sprite = fishData.sprite;
         if (directionX == DirectionX.Left)
         {
             _renderer.flipX = true;

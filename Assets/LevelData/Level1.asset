@@ -21,35 +21,35 @@ MonoBehaviour:
     swimEdgeRight: 10
     spawnPosY: 70
     speedX: 0.6
-    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 2
     swimEdgeLeft: 40
     swimEdgeRight: 80
     spawnPosY: 40
     speedX: 1
-    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 4
     swimEdgeLeft: 30
     swimEdgeRight: 50
     spawnPosY: 20
     speedX: 0.8
-    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 1
     swimEdgeLeft: 80
     swimEdgeRight: 100
     spawnPosY: 50
     speedX: 0.7
-    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 1
     swimEdgeLeft: 20
     swimEdgeRight: 60
     spawnPosY: 90
     speedX: 0.5
-    sprite: {fileID: 6937817954938267909, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   allowNegativeNumbers: 0
   includeMultiplication: 0
   timeLimit: 0

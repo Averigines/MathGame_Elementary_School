@@ -24,7 +24,7 @@ public class FishClusterContainer : MonoBehaviour
     public delegate void OnFishReeledIn(int points);
     public event OnFishReeledIn onFishReeledIn;
 
-    public void Initialize(FishData fishData, GameObject fishPrefab, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
+    public void Initialize(FishData fishData, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
     {
         _fishInContainer = new List<Fish>();
         _directionX = directionX;
@@ -56,9 +56,9 @@ public class FishClusterContainer : MonoBehaviour
                 Vector3 fishPosition = new Vector3(x, y, transform.position.z);
 
                 // Instantiate fish
-                var go = Instantiate(fishPrefab, fishPosition, Quaternion.identity, transform);
+                var go = Instantiate(fishData.prefab, fishPosition, Quaternion.identity, transform);
                 var fish = go.GetComponent<Fish>();
-                fish.Initialize(fishData, _directionX);
+                fish.Initialize(_directionX);
                 _fishInContainer.Add(fish);
 
                 fishPlaced++;

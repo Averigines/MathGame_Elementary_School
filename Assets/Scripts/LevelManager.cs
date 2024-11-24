@@ -7,7 +7,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     [SerializeField] private Player player;
     [SerializeField] private GameObject fishClusterContainerPrefab;
-    [SerializeField] private GameObject fishPrefab;
 
     private int _currPoints;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,7 +43,7 @@ public class LevelManager : MonoBehaviour
         GameObject go = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
         
         var fishCluster = go.GetComponent<FishClusterContainer>();
-        fishCluster.Initialize(fishData, fishPrefab, startPos.y, fishAreaX, directionX, directionY);
+        fishCluster.Initialize(fishData, startPos.y, fishAreaX, directionX, directionY);
         fishCluster.onFishReeledIn += HandleFishReeledIn;
     }
 
