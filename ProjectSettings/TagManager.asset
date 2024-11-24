@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - Effects
-  - 
+  - UIAfterEffects
   - 
   - 
   - 
@@ -48,5 +48,9 @@ TagManager:
   - name: Effects
     uniqueID: 2215402633
     locked: 0
+  - name: UI
+    uniqueID: 1172596601
+    locked: 0
   m_RenderingLayers:
   - Default
+  - UI

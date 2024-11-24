@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 929663099064268230}
   - component: {fileID: 6603889139657678732}
   - component: {fileID: 4258997415640977589}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1172596601
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &6603889139657678732
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 6476324788185560933}
   - component: {fileID: 4228019071806989991}
   - component: {fileID: 262337152898972942}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: ValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
