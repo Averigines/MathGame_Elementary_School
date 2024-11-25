@@ -67,12 +67,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _EnableExternalAlpha: 0
-    - _GradientScale: 10
+    - _GradientScale: 25
     - _ZWrite: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DistortionPower: {r: 0.015, g: 0.015, b: 0, a: 0}
-    - _DistortionSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _DistortionPower: {r: 0.01, g: 0.01, b: 0, a: 0}
+    - _DistortionSpeed: {r: 0.1, g: 0.05, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
