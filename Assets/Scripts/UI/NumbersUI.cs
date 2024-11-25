@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -5,18 +7,22 @@ public class NumbersUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI current;
     [SerializeField] private TextMeshProUGUI goal;
-    private readonly string _currentPreFix = "Current Number: ";
-    private readonly string _goalPreFix = "Goal Number: ";
+    private readonly string _goalPreFix = "Goal: ";
     
     private void Start()
     {
-        ChangeCurrentNumber(0);
+        ResetCalculationPath();
         ChangeGoalNumber(0);
     }
-
-    public void ChangeCurrentNumber(int num)
+    
+    public void ResetCalculationPath()
     {
-        current.text = _currentPreFix + num;
+        current.text = "0";
+    }
+
+    public void ChangeCalculationPath(string calc)
+    {
+        current.text = calc;
     }
 
     public void ChangeGoalNumber(int num)

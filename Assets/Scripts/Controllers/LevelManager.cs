@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Background background;
 
     private int _currPoints;
+    private List<Tuple<FishType, int>> _calculationPath;
     private List<GameObject> _fishClusters;
 
     [SerializeField] private FishCatchUI _fishCatchUI;
@@ -31,6 +33,7 @@ public class LevelManager : MonoBehaviour
             }
         }
         _fishClusters = new List<GameObject>();
+        _calculationPath = new List<Tuple<FishType, int>>();
         
         player.ResetPosition();
         player.ChangePlayerState(Player.PlayerState.Idle);
@@ -47,7 +50,7 @@ public class LevelManager : MonoBehaviour
             SpawnFishCluster(fish);
         }
 
-        _numbersUI.ChangeCurrentNumber(_currPoints);
+        _numbersUI.ResetCalculationPath();
         _numbersUI.ChangeGoalNumber(_currentLevelData.goalNumber);
     }
     
@@ -72,7 +75,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(CatchFishSequence(type, points));
     }
 
-    private void ChangePoints(FishType type, int points)
+    private void ChangePoints(FishType type, int points, string calcPathString)
     {
         switch (type)
         {
@@ -86,7 +89,7 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-        _numbersUI.ChangeCurrentNumber(_currPoints);
+        _numbersUI.ChangeCalculationPath(calcPathString);
     }
 
     private void IncreasePoints(int points)
@@ -116,32 +119,73 @@ public class LevelManager : MonoBehaviour
         OnCatchSequenceStart?.Invoke();
         
         string value = null;
-        string result = null;
-        
+
         switch (type)
         {
             case FishType.Addition:
+                _calculationPath.Add(new Tuple<FishType, int>(FishType.Addition, points));
                 value = "+ " + points;
-                result = _currPoints + " + " + points + " = " + (_currPoints + points);
                 break;
             case FishType.Substraction:
+                _calculationPath.Add(new Tuple<FishType, int>(FishType.Substraction, points));
                 value = "- " + points;
-                result = _currPoints + " - " + points + " = " + (_currPoints - points);
                 break;
             default:
                 break;
         }
+
+        string calcPathString = GetStringSequenceForCalculationPath();
         
         yield return StartCoroutine(_fishCatchUI.ShowValue(value));
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_fishCatchUI.HideValue(value));
+        yield return StartCoroutine(_fishCatchUI.HideValue());
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_fishCatchUI.ShowResult(result));
+        yield return StartCoroutine(_fishCatchUI.ShowResult(calcPathString));
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_fishCatchUI.HideResult(result));
-        ChangePoints(type, points);
+        yield return StartCoroutine(_fishCatchUI.HideResult());
+        ChangePoints(type, points, calcPathString);
         
         OnCatchSequenceEnd?.Invoke();
+    }
+
+    private string GetStringSequenceForCalculationPath()
+    {
+        bool firstCalc = true;
+        string calcPathString = null;
+        
+        foreach (var calc in _calculationPath)
+        {
+            if (firstCalc)
+            {
+                firstCalc = false;
+                switch (calc.Item1)
+                {
+                    case FishType.Addition:
+                        calcPathString = calc.Item2.ToString();
+                        break;
+                    case FishType.Substraction:
+                        calcPathString = "-" + calc.Item2;
+                        break;
+                    default:
+                        break;
+                }
+                continue;
+            }
+
+            switch (calc.Item1)
+            {
+                case FishType.Addition:
+                    calcPathString += " + " + calc.Item2;
+                    break;
+                case FishType.Substraction:
+                    calcPathString += " - " + calc.Item2;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return calcPathString;
     }
 
     private void CompleteLevel()

@@ -26,9 +26,8 @@ public class FishCatchUI : MonoBehaviour
         yield return textValue.DOFade(1, fadeDuration).WaitForCompletion();
     }
 
-    public IEnumerator HideValue(string value)
+    public IEnumerator HideValue()
     {
-        textValue.text = value;
         Color color = textValue.color;
         color.a = 1f;
         textValue.color = color;
@@ -48,9 +47,8 @@ public class FishCatchUI : MonoBehaviour
         yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
     }
 
-    public IEnumerator HideResult(string result)
+    public IEnumerator HideResult()
     {
-        textResult.text = result;
         Color color = textResult.color;
         color.a = 1f;
         textResult.color = color;
