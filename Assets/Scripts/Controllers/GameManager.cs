@@ -25,27 +25,43 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] allLevels;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private ScreenFade screenFade;
     private int _currentLevelIndex = 0;
 
     private void OnEnable()
     {
-        levelManager.onLevelCompleted += LoadNextLevel;
+        levelManager.onLevelCompleted += OnLevelCompletedHandler;
     }
 
     private void OnDisable()
     {
-        levelManager.onLevelCompleted -= LoadNextLevel;
+        levelManager.onLevelCompleted -= OnLevelCompletedHandler;
     }
 
     void Start()
     {
         LoadFirstLevel();
     }
+    
+    private void OnLevelCompletedHandler()
+    {
+        StartCoroutine(LevelCompletionSequence());
+    }
 
     private void LoadFirstLevel()
     {
         _currentLevelIndex = 0;
         levelManager.InitializeLevel(allLevels[_currentLevelIndex]);
+    }
+
+    private IEnumerator LevelCompletionSequence()
+    {
+        yield return StartCoroutine(screenFade.FadeToBlack());
+
+        yield return new WaitForSeconds(1);
+        
+        LoadNextLevel();
+        yield return StartCoroutine(screenFade.FadeFromBlack());
     }
     
     private void LoadNextLevel()
