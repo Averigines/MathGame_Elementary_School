@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Unity.Mathematics.Geometry;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
