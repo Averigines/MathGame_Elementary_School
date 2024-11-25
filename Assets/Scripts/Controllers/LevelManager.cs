@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,9 +16,13 @@ public class LevelManager : MonoBehaviour
 
     private int _currPoints;
     private List<GameObject> _fishClusters;
+
+    [SerializeField] private FishCatchUI _fishCatchUI;
+    [SerializeField] private NumbersUI _numbersUI;
     
-    public delegate void OnLevelCompleted();
-    public event OnLevelCompleted onLevelCompleted;
+    public event Action OnLevelCompleted;
+    public event Action OnCatchSequenceStart;
+    public event Action OnCatchSequenceEnd;
 
     public void InitializeLevel(LevelData levelData)
     {
@@ -43,6 +49,9 @@ public class LevelManager : MonoBehaviour
         {
             SpawnFishCluster(fish);
         }
+
+        _numbersUI.ChangeCurrentNumber(_currPoints);
+        _numbersUI.ChangeGoalNumber(_currentLevelData.goalNumber);
     }
     
     private void SpawnFishCluster(FishData fishData)
@@ -57,10 +66,16 @@ public class LevelManager : MonoBehaviour
         
         var fishCluster = go.GetComponent<FishClusterContainer>();
         fishCluster.Initialize(fishData, startPos.y, fishAreaX, directionX, directionY);
-        fishCluster.onFishReeledIn += HandleFishReeledIn;
+        fishCluster.OnFishReeledIn += HandleFishReeledIn;
     }
 
     private void HandleFishReeledIn(FishType type, int points)
+    {
+        player.ChangePlayerState(Player.PlayerState.Idle);
+        StartCoroutine(CatchFishSequence(type, points));
+    }
+
+    private void ChangePoints(FishType type, int points)
     {
         switch (type)
         {
@@ -73,8 +88,8 @@ public class LevelManager : MonoBehaviour
             default:
                 break;
         }
-        
-        player.ChangePlayerState(Player.PlayerState.Idle);
+
+        _numbersUI.ChangeCurrentNumber(_currPoints);
     }
 
     private void IncreasePoints(int points)
@@ -98,9 +113,42 @@ public class LevelManager : MonoBehaviour
             CompleteLevel();
         }
     }
-    
+
+    private IEnumerator CatchFishSequence(FishType type, int points)
+    {
+        OnCatchSequenceStart?.Invoke();
+        
+        string value = null;
+        string result = null;
+        
+        switch (type)
+        {
+            case FishType.Addition:
+                value = "+ " + points;
+                result = _currPoints + " + " + points + " = " + (_currPoints + points);
+                break;
+            case FishType.Substraction:
+                value = "- " + points;
+                result = _currPoints + " - " + points + " = " + (_currPoints - points);
+                break;
+            default:
+                break;
+        }
+        
+        yield return StartCoroutine(_fishCatchUI.ShowValue(value));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_fishCatchUI.HideValue(value));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_fishCatchUI.ShowResult(result));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_fishCatchUI.HideResult(result));
+        ChangePoints(type, points);
+        
+        OnCatchSequenceEnd?.Invoke();
+    }
+
     private void CompleteLevel()
     {
-        onLevelCompleted?.Invoke();
+        OnLevelCompleted?.Invoke();
     }
 }

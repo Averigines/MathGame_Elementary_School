@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Build;
@@ -24,9 +25,7 @@ public class FishClusterContainer : MonoBehaviour
     private YRange _yRange;
 
     [SerializeField] private Vector2 textOffset = new Vector2(0.3f, 0.3f);
-
-    public delegate void OnFishReeledIn(FishType type ,int points);
-    public event OnFishReeledIn onFishReeledIn;
+    public event Action<FishType, int> OnFishReeledIn;
 
     public void Initialize(FishData fishData, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
     {
@@ -161,7 +160,7 @@ public class FishClusterContainer : MonoBehaviour
 
     public void GetReeledIn()
     {
-        onFishReeledIn?.Invoke(_type, _value);
+        OnFishReeledIn?.Invoke(_type, _value);
         Destroy(gameObject);
     }
 }

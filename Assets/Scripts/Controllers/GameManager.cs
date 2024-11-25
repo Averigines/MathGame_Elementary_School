@@ -30,12 +30,16 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        levelManager.onLevelCompleted += OnLevelCompletedHandler;
+        levelManager.OnLevelCompleted += OnLevelCompletedHandler;
+        levelManager.OnCatchSequenceStart += DisablePlayerActions;
+        levelManager.OnCatchSequenceEnd += EnablePlayerActions;
     }
 
     private void OnDisable()
     {
-        levelManager.onLevelCompleted -= OnLevelCompletedHandler;
+        levelManager.OnLevelCompleted -= OnLevelCompletedHandler;
+        levelManager.OnCatchSequenceStart -= DisablePlayerActions;
+        levelManager.OnCatchSequenceEnd -= EnablePlayerActions;
     }
 
     void Start()
@@ -56,12 +60,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LevelCompletionSequence()
     {
-        yield return StartCoroutine(screenFade.FadeToBlack());
-
-        yield return new WaitForSeconds(1);
+        DisablePlayerActions();
         
+        yield return StartCoroutine(screenFade.FadeToBlack());
+        yield return new WaitForSeconds(1);
         LoadNextLevel();
         yield return StartCoroutine(screenFade.FadeFromBlack());
+        
+        EnablePlayerActions();
     }
     
     private void LoadNextLevel()
@@ -75,5 +81,15 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("All levels completed!");
         }
+    }
+
+    private void DisablePlayerActions()
+    {
+        
+    }
+
+    private void EnablePlayerActions()
+    {
+        
     }
 }
