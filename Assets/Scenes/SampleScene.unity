@@ -791,6 +791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 900062934}
   - component: {fileID: 900062933}
+  - component: {fileID: 900062935}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -842,7 +843,7 @@ SpriteRenderer:
   m_SortingLayerID: 1669812239
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2318850175068859235, guid: db9bec36ec7a2824ba9dfb4499fb70f6, type: 3}
+  m_Sprite: {fileID: -2579957754792524931, guid: 3f8cd1dcc7b8742418b728c71cef783e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -868,6 +869,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 282017465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900062935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900062932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49004585c5b15a48a6cd20132f05709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundVariants:
+  - {fileID: -2579957754792524931, guid: 3f8cd1dcc7b8742418b728c71cef783e, type: 3}
+  - {fileID: -2579957754792524931, guid: 8cd01063894804f41a0400d5cdba32ed, type: 3}
+  - {fileID: -2579957754792524931, guid: 092862203d5f6dd479bb162b644dbc2b, type: 3}
 --- !u!1 &1035815692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,6 +1378,10 @@ MonoBehaviour:
   allLevels:
   - {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
   - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
+  - {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
+  - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
+  - {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
+  - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
   levelManager: {fileID: 2094450850}
 --- !u!4 &2094450849
 Transform:
@@ -1391,6 +1412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 500060082}
   fishClusterContainerPrefab: {fileID: 2665306700835238679, guid: 3ec17fca3222b2c4681887b37f44cbe8, type: 3}
+  background: {fileID: 900062935}
 --- !u!114 &2094450851
 MonoBehaviour:
   m_ObjectHideFlags: 0

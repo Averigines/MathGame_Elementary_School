@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
     
     [SerializeField] private Player player;
     [SerializeField] private GameObject fishClusterContainerPrefab;
+    [SerializeField] private Background background;
 
     private int _currPoints;
     private List<GameObject> _fishClusters;
@@ -18,8 +20,20 @@ public class LevelManager : MonoBehaviour
 
     public void InitializeLevel(LevelData levelData)
     {
+        if (_fishClusters != null)
+        {
+            foreach (var cluster in _fishClusters)
+            {
+                Destroy(cluster);
+            }
+        }
         _fishClusters = new List<GameObject>();
+        
+        player.ResetPosition();
+        player.ChangePlayerState(Player.PlayerState.Idle);
         _currPoints = 0;
+        
+        background.ChangeBackground();
         
         _currentLevelData = levelData;
         Debug.Log($"Level {_currentLevelData.levelNumber}");
@@ -87,13 +101,6 @@ public class LevelManager : MonoBehaviour
     
     private void CompleteLevel()
     {
-        foreach (var cluster in _fishClusters)
-        {
-            Destroy(cluster);
-        }
-
-        player.ResetPosition();
-        player.ChangePlayerState(Player.PlayerState.Idle);
         onLevelCompleted?.Invoke();
     }
 }

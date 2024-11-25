@@ -61,7 +61,6 @@ public class ScreenManager : MonoBehaviour
         Transform tf = background.transform;
 
         float newScale = ScreenData.backgroundArea.width / spriteRenderer.bounds.size.x;
-        //Vector3 newScale = new Vector3(ScreenData.backgroundDimensions.width / spriteRenderer.bounds.size.x, ScreenData.backgroundDimensions.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = new Vector3(newScale, newScale, tf.localScale.z);
         
         Vector3 backgroundCenter = new Vector3((ScreenData.backgroundArea.left + ScreenData.backgroundArea.right) / 2f,
