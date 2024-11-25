@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] allLevels;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private TouchManager touchManager;
     [SerializeField] private ScreenFade screenFade;
     private int _currentLevelIndex = 0;
 
@@ -85,11 +86,11 @@ public class GameManager : MonoBehaviour
 
     private void DisablePlayerActions()
     {
-        
+        touchManager.gameObject.SetActive(false);
     }
 
     private void EnablePlayerActions()
     {
-        
+        touchManager.gameObject.SetActive(true);
     }
 }
