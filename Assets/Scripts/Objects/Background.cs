@@ -23,7 +23,7 @@ public class Background : MonoBehaviour
                 
             backgrounds.Add(bg);
         }
-        var backgroundIndex = Random.Range(0, backgrounds.Count - 1);
+        var backgroundIndex = Random.Range(0, backgrounds.Count);
         _renderer.sprite = backgrounds[backgroundIndex];
         _currBackground = backgroundVariants[backgroundIndex];
     }

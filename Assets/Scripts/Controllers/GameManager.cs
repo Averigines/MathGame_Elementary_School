@@ -75,6 +75,23 @@ public class GameManager : MonoBehaviour
             Debug.Log("All levels completed!");
         }
     }
+    
+    public void RestartLevel()
+    {
+        StartCoroutine(RestartLevelSequence());
+    }
+
+    private IEnumerator RestartLevelSequence()
+    {
+        DisablePlayerActions();
+        
+        yield return StartCoroutine(screenFade.FadeToBlack());
+        yield return new WaitForSeconds(1);
+        levelManager.InitializeLevel(allLevels[_currentLevelIndex]);
+        yield return StartCoroutine(screenFade.FadeFromBlack());
+        
+        EnablePlayerActions();
+    }
 
     private void DisablePlayerActions()
     {

@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour
 
         string calcPathString = GetStringSequenceForCalculationPath();
         
-        yield return StartCoroutine(_fishCatchUI.ShowResult(calcPathString));
+        yield return StartCoroutine(_fishCatchUI.ShowResult(calcPathString, points));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(_fishCatchUI.HideResult());
         ChangePoints(type, points, calcPathString);

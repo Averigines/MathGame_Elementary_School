@@ -19,9 +19,10 @@ public class FishCatchUI : MonoBehaviour
         highlightColorHexCode = ColorUtility.ToHtmlStringRGB(highlightColor);
     }
 
-    public IEnumerator ShowResult(string result)
+    public IEnumerator ShowResult(string result, int lastCatch)
     {
-        int firstIndexToColor = result.Length > 1 ? result.Length - 3 : result.Length - 1;
+        int firstIndexToColor = result.Length > 2 ? result.Length - 3 : result.Length - 1;
+        if (lastCatch > 9) firstIndexToColor--;
         int lastIndexToColor = result.Length - 1;
 
         string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, highlightColorHexCode);
