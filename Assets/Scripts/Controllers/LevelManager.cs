@@ -136,10 +136,6 @@ public class LevelManager : MonoBehaviour
 
         string calcPathString = GetStringSequenceForCalculationPath();
         
-        yield return StartCoroutine(_fishCatchUI.ShowValue(value));
-        yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_fishCatchUI.HideValue());
-        yield return new WaitForSeconds(2);
         yield return StartCoroutine(_fishCatchUI.ShowResult(calcPathString));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(_fishCatchUI.HideResult());
