@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
@@ -12,12 +14,13 @@ public class TouchManager : MonoBehaviour
     {
         _mainCamera = Camera.main;
     }
-    
+
     private void OnTap()
     {
         if (Touchscreen.current == null) return;
-        
         TouchControl touch = Touchscreen.current.primaryTouch;
+        if (IsTouchOverUI(touch)) return;
+        
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
 
@@ -31,7 +34,7 @@ public class TouchManager : MonoBehaviour
     private void OnPress()
     {
         if (Touchscreen.current == null) return;
-        
+
         TouchControl touch = Touchscreen.current.primaryTouch;
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
@@ -56,5 +59,10 @@ public class TouchManager : MonoBehaviour
         {
             player.StartDeceleratingFishingRod();
         }
+    }
+    
+    private bool IsTouchOverUI(TouchControl touch)
+    {
+        return EventSystem.current.IsPointerOverGameObject(touch.ReadValue().touchId);
     }
 }

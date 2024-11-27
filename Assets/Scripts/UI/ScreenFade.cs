@@ -11,10 +11,12 @@ public class ScreenFade : MonoBehaviour
     private void Start()
     {
         _fadeImage = GetComponent<RawImage>();
+        _fadeImage.enabled = false;
     }
     
     public IEnumerator FadeToBlack()
     {
+        _fadeImage.enabled = true;
         Color color = _fadeImage.color;
         color.a = 0f;
         _fadeImage.color = color;
@@ -30,5 +32,6 @@ public class ScreenFade : MonoBehaviour
         _fadeImage.color = color;
 
         yield return _fadeImage.DOFade(0, _fadeDuration).WaitForCompletion();
+        _fadeImage.enabled = false;
     }
 }

@@ -1853,10 +1853,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1892513734}
   - {fileID: 780901787}
   - {fileID: 674043342}
   - {fileID: 1190328657}
+  - {fileID: 1892513734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2546,7 +2546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allLevels:
-  - {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
+  - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
   - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}
   - {fileID: 11400000, guid: 3d685c8ec557fae47b9f40b9347be217, type: 2}
   - {fileID: 11400000, guid: a3bb243264197964598538c6c1a1b703, type: 2}

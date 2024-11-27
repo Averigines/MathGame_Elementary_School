@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour
         }
 
         _numbersUI.ResetForNewLevel(_currentLevelData.goalNumber);
+        _fishCatchUI.ResetForNewLevel();
     }
     
     private void SpawnFishCluster(FishData fishData)
@@ -114,11 +115,9 @@ public class LevelManager : MonoBehaviour
         {
             case FishType.Addition:
                 _calculationPath.Add(new Tuple<FishType, int>(FishType.Addition, points));
-                value = "+ " + points;
                 break;
             case FishType.Substraction:
                 _calculationPath.Add(new Tuple<FishType, int>(FishType.Substraction, points));
-                value = "- " + points;
                 break;
             default:
                 break;

@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     
     public void RestartLevel()
     {
+        levelManager.StopAllCoroutines();
         StartCoroutine(RestartLevelSequence());
     }
 
