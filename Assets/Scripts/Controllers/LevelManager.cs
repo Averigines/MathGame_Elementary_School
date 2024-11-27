@@ -198,8 +198,15 @@ public class LevelManager : MonoBehaviour
             _numbersUI.ChangeSubmitButton(true);
             StartCoroutine(CompleteLevel());
         }
-        else _numbersUI.ChangeSubmitButton(false);
-        
+        else StartCoroutine(HandleIncorrectSubmit());
+
+    }
+
+    private IEnumerator HandleIncorrectSubmit()
+    {
+        _numbersUI.ChangeSubmitButton(false);
+        yield return new WaitForSeconds(2);
+        _numbersUI.ResetSubmitButton();
     }
 
     private IEnumerator CompleteLevel()

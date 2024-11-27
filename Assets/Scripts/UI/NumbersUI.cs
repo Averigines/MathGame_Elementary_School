@@ -49,7 +49,7 @@ public class NumbersUI : MonoBehaviour
         else submitBtnImage.sprite = _submitButtons.incorrectBtn;
     }
 
-    private void ResetSubmitButton()
+    public void ResetSubmitButton()
     {
         submitBtnImage.sprite = _submitButtons.defaultBtn;
     }
