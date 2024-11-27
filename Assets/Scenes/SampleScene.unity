@@ -1272,7 +1272,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -32, y: 0}
+  m_SizeDelta: {x: -48, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754006758
 MonoBehaviour:
@@ -1628,7 +1628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialBackgroundRT: {fileID: 898540713}
-  offSetTextY: 10
+  offSetTextY: 24
 --- !u!1 &900062932
 GameObject:
   m_ObjectHideFlags: 0
