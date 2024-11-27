@@ -1356,58 +1356,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769013096}
   m_CullTransparentMesh: 1
---- !u!1 &780901786
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 780901787}
-  - component: {fileID: 780901788}
-  m_Layer: 5
-  m_Name: FishCatch
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &780901787
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780901786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1988956831}
-  m_Father: {fileID: 1064342783}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.45}
-  m_AnchorMax: {x: 1, y: 0.55}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &780901788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 780901786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cec8f4138105cd47a81e178ad7009b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textResult: {fileID: 1988956832}
-  fadeDuration: 1
-  highlightColor: {r: 0, g: 0.3490566, b: 0.033199336, a: 0}
 --- !u!1 &810807532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,7 +1801,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 780901787}
+  - {fileID: 1988956831}
   - {fileID: 674043342}
   - {fileID: 1190328657}
   - {fileID: 1892513734}
@@ -2388,6 +2336,7 @@ GameObject:
   - component: {fileID: 1988956831}
   - component: {fileID: 1988956833}
   - component: {fileID: 1988956832}
+  - component: {fileID: 1988956834}
   m_Layer: 5
   m_Name: Result
   m_TagString: Untagged
@@ -2407,10 +2356,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 780901787}
+  m_Father: {fileID: 1064342783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.45}
+  m_AnchorMax: {x: 1, y: 0.55}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2513,6 +2462,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988956830}
   m_CullTransparentMesh: 1
+--- !u!114 &1988956834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988956830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cec8f4138105cd47a81e178ad7009b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 1
+  highlightColor: {r: 0, g: 0.3490566, b: 0.033199336, a: 0}
 --- !u!1 &2094450847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,7 +2548,7 @@ MonoBehaviour:
   player: {fileID: 500060082}
   fishClusterContainerPrefab: {fileID: 2665306700835238679, guid: 3ec17fca3222b2c4681887b37f44cbe8, type: 3}
   background: {fileID: 900062935}
-  _fishCatchUI: {fileID: 780901788}
+  _resultUI: {fileID: 1988956834}
   _numbersUI: {fileID: 674043344}
 --- !u!114 &2094450851
 MonoBehaviour:
