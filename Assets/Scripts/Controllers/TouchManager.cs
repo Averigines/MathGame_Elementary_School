@@ -29,6 +29,12 @@ public class TouchManager : MonoBehaviour
         {
             player.SetTargetPosition(worldPoint.x);
         }
+        
+        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+            player.ValidStatesForFishing.Contains(player.CurrPlayerState))
+        {
+            player.StartFishing();
+        }
     }
 
     private void OnPress()

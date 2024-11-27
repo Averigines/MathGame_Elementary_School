@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
 
     public PlayerState CurrPlayerState {get; private set;}
     public PlayerState[] ValidStatesForMoving {get; private set;}
+    public PlayerState[] ValidStatesForFishing {get; private set;}
 
     private bool _needsToTurnAfterMoving;
     
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving, PlayerState.Fishing };
+        ValidStatesForFishing = new[] { PlayerState.Idle, PlayerState.Moving };
         CurrPlayerState = PlayerState.Idle;
 
         _startPosition = transform.position;
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour
         {
             transform.position = _targetPosition;
             if (_needsToTurnAfterMoving) FlipPlayerModel(!_renderer.flipX);
-            ChangePlayerState(PlayerState.Fishing);
+            ChangePlayerState(PlayerState.Idle);
         }
         else
         {
@@ -113,8 +115,9 @@ public class Player : MonoBehaviour
         fishingRod.transform.localPosition = needsToBeFlipped ? new Vector3(-fishingRodPosAbs, localPos.y, localPos.z) : new Vector3(fishingRodPosAbs, localPos.y, localPos.z);
     }
     
-    private void StartFishing()
+    public void StartFishing()
     {
+        ChangePlayerState(PlayerState.Fishing);
         var go = Instantiate(fishingRodHookPrefab, fishingRod.transform);
         var minFishingHookDepth = ScreenData.seaArea.top;
         var maxFishingHookDepth = ScreenData.seaArea.bottom;
@@ -175,7 +178,6 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.Fishing:
                 _animator.SetTrigger("Fishing");
-                StartFishing();
                 break;
             default:
                 _animator.SetTrigger("Idle");
