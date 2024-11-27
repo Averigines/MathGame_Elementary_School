@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
@@ -50,8 +51,7 @@ public class LevelManager : MonoBehaviour
             SpawnFishCluster(fish);
         }
 
-        _numbersUI.ResetCalculationPath();
-        _numbersUI.ChangeGoalNumber(_currentLevelData.goalNumber);
+        _numbersUI.ResetForNewLevel(_currentLevelData.goalNumber);
     }
     
     private void SpawnFishCluster(FishData fishData)
@@ -96,22 +96,12 @@ public class LevelManager : MonoBehaviour
     {
         _currPoints += points;
         print(_currPoints);
-
-        if (_currPoints == _currentLevelData.goalNumber)
-        {
-            CompleteLevel();
-        }
     }
 
     private void SubstractPoints(int points)
     {
         _currPoints -= points;
         print(_currPoints);
-
-        if (_currPoints == _currentLevelData.goalNumber)
-        {
-            CompleteLevel();
-        }
     }
 
     private IEnumerator CatchFishSequence(FishType type, int points)
@@ -182,6 +172,17 @@ public class LevelManager : MonoBehaviour
         }
 
         return calcPathString;
+    }
+
+    public void SubmitScore(Button submitBtn)
+    {
+        if (_currPoints == _currentLevelData.goalNumber)
+        {
+            _numbersUI.ChangeSubmitButton(true);
+            CompleteLevel();
+        }
+        else _numbersUI.ChangeSubmitButton(false);
+        
     }
 
     private void CompleteLevel()
