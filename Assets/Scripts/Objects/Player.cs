@@ -68,8 +68,12 @@ public class Player : MonoBehaviour
 
     public void SetTargetPosition(float rodPos)
     {
-        if (CurrPlayerState != PlayerState.Moving) ChangePlayerState(PlayerState.Moving);
-        
+        if (CurrPlayerState == PlayerState.Fishing)
+        {
+            StopFishing();
+        }
+        ChangePlayerState(PlayerState.Moving);
+
         bool needsToFlip;
         if (rodPos < transform.position.x - playerModel.transform.lossyScale.x / 2)
         {
@@ -125,6 +129,12 @@ public class Player : MonoBehaviour
         _activeFishingHook.Initialize(minFishingHookDepth, maxFishingHookDepth);
     }
 
+    public void StopFishing(PlayerState newState)
+    {
+        Destroy(_activeFishingHook.gameObject);
+        ChangePlayerState(newState);
+    }
+    
     private void StopFishing()
     {
         Destroy(_activeFishingHook.gameObject);
@@ -148,20 +158,7 @@ public class Player : MonoBehaviour
     public void ChangePlayerState(PlayerState state)
     {
         if (state == CurrPlayerState) return;
-        
-        switch (CurrPlayerState)
-        {
-            case PlayerState.Idle:
-                break;
-            case PlayerState.Moving:
-                break;
-            case PlayerState.Fishing:
-                StopFishing();
-                break;
-            default:
-                break;
-        }
-        
+
         CurrPlayerState = state;
 
         _animator.ResetTrigger("Idle");

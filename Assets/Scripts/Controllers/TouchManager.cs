@@ -35,6 +35,12 @@ public class TouchManager : MonoBehaviour
         {
             player.StartFishing();
         }
+        
+        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+                 player.CurrPlayerState == Player.PlayerState.Fishing)
+        {
+            player.StopFishing(Player.PlayerState.Idle);
+        }
     }
 
     private void OnPress()
@@ -42,6 +48,8 @@ public class TouchManager : MonoBehaviour
         if (Touchscreen.current == null) return;
 
         TouchControl touch = Touchscreen.current.primaryTouch;
+        if (IsTouchOverUI(touch)) return;
+        
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
         
