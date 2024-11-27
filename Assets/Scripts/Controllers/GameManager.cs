@@ -24,15 +24,15 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         levelManager.OnLevelCompleted += OnLevelCompletedHandler;
-        levelManager.OnCatchSequenceStart += DisablePlayerActions;
-        levelManager.OnCatchSequenceEnd += EnablePlayerActions;
+        levelManager.OnResultSequenceStart += DisablePlayerActions;
+        levelManager.OnResultSequenceEnd += EnablePlayerActions;
     }
 
     private void OnDisable()
     {
         levelManager.OnLevelCompleted -= OnLevelCompletedHandler;
-        levelManager.OnCatchSequenceStart -= DisablePlayerActions;
-        levelManager.OnCatchSequenceEnd -= EnablePlayerActions;
+        levelManager.OnResultSequenceStart -= DisablePlayerActions;
+        levelManager.OnResultSequenceEnd -= EnablePlayerActions;
     }
 
     void Start()

@@ -3,15 +3,16 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class FishCatchUI : MonoBehaviour
+public class ResultUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textResult;
+    private TextMeshProUGUI textResult;
     [SerializeField] private float fadeDuration;
     [SerializeField] private Color highlightColor;
     private string highlightColorHexCode;
 
     private void Start()
     {
+        textResult = GetComponent<TextMeshProUGUI>();
         var color = textResult.color;
         color.a = 0;
         textResult.color = color;
@@ -29,6 +30,20 @@ public class FishCatchUI : MonoBehaviour
         if (lastCatch > 9 || result.Length == 2) firstIndexToColor--;
         int lastIndexToColor = result.Length - 1;
 
+        string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, highlightColorHexCode);
+        
+        textResult.text = textToShow;
+
+        yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
+    }
+    
+    public IEnumerator ShowResult(string result)
+    {
+        textResult.enabled = true;
+
+        int firstIndexToColor = 0;
+        int lastIndexToColor = result.Length - 1;
+        
         string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, highlightColorHexCode);
         
         textResult.text = textToShow;

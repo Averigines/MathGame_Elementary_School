@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
@@ -17,12 +18,12 @@ public class LevelManager : MonoBehaviour
     private List<Tuple<FishType, int>> _calculationPath;
     private List<GameObject> _fishClusters;
 
-    [SerializeField] private FishCatchUI _fishCatchUI;
+    [SerializeField] private ResultUI _resultUI;
     [SerializeField] private NumbersUI _numbersUI;
-    
+
     public event Action OnLevelCompleted;
-    public event Action OnCatchSequenceStart;
-    public event Action OnCatchSequenceEnd;
+    public event Action OnResultSequenceStart;
+    public event Action OnResultSequenceEnd;
 
     public void InitializeLevel(LevelData levelData)
     {
@@ -52,7 +53,7 @@ public class LevelManager : MonoBehaviour
         }
 
         _numbersUI.ResetForNewLevel(_currentLevelData.goalNumber);
-        _fishCatchUI.ResetForNewLevel();
+        _resultUI.ResetForNewLevel();
     }
     
     private void SpawnFishCluster(FishData fishData)
@@ -107,10 +108,6 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator CatchFishSequence(FishType type, int points)
     {
-        OnCatchSequenceStart?.Invoke();
-        
-        string value = null;
-
         switch (type)
         {
             case FishType.Addition:
@@ -122,18 +119,34 @@ public class LevelManager : MonoBehaviour
             default:
                 break;
         }
-
-        string calcPathString = GetStringSequenceForCalculationPath();
         
-        yield return StartCoroutine(_fishCatchUI.ShowResult(calcPathString, points));
-        yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_fishCatchUI.HideResult());
-        ChangePoints(type, points, calcPathString);
-        
-        OnCatchSequenceEnd?.Invoke();
+        yield return StartCoroutine(ResultSequence(type, points));
     }
 
-    private string GetStringSequenceForCalculationPath()
+    private IEnumerator ResultSequence(FishType type, int points)
+    {
+        OnResultSequenceStart?.Invoke();
+        string calcPathString = GetStringSequenceForCalculationPath(false);
+        
+        yield return StartCoroutine(_resultUI.ShowResult(calcPathString, points));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_resultUI.HideResult());
+        OnResultSequenceEnd?.Invoke();
+        ChangePoints(type, points, calcPathString);
+    }
+    
+    private IEnumerator ResultSequence()
+    {
+        OnResultSequenceStart?.Invoke();
+        string calcPathString = GetStringSequenceForCalculationPath(true);
+        
+        yield return StartCoroutine(_resultUI.ShowResult(calcPathString));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_resultUI.HideResult());
+        OnResultSequenceEnd?.Invoke();
+    }
+
+    private string GetStringSequenceForCalculationPath(bool endResult)
     {
         bool firstCalc = true;
         string calcPathString = null;
@@ -170,6 +183,11 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        if (endResult)
+        {
+            calcPathString += " = " + _currPoints;
+        }
+
         return calcPathString;
     }
 
@@ -178,14 +196,15 @@ public class LevelManager : MonoBehaviour
         if (_currPoints == _currentLevelData.goalNumber)
         {
             _numbersUI.ChangeSubmitButton(true);
-            CompleteLevel();
+            StartCoroutine(CompleteLevel());
         }
         else _numbersUI.ChangeSubmitButton(false);
         
     }
 
-    private void CompleteLevel()
+    private IEnumerator CompleteLevel()
     {
+        yield return StartCoroutine(ResultSequence());
         OnLevelCompleted?.Invoke();
     }
 }
