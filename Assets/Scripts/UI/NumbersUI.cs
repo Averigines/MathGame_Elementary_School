@@ -14,8 +14,9 @@ public class NumbersUI : MonoBehaviour
         public Sprite correctBtn;
         public Sprite incorrectBtn;
     }
-    
-    [SerializeField] private Image submitBtnImage;
+
+    [SerializeField] private Button submitBtn;
+    private Image submitBtnImage;
     [SerializeField] private Sprite submitBtnDefault;
     [SerializeField] private Sprite submitBtnCorrect;
     [SerializeField] private Sprite submitBtnIncorrect;
@@ -26,6 +27,8 @@ public class NumbersUI : MonoBehaviour
         _submitButtons.defaultBtn = submitBtnDefault;
         _submitButtons.correctBtn = submitBtnCorrect;
         _submitButtons.incorrectBtn = submitBtnIncorrect;
+
+        submitBtnImage = submitBtn.GetComponent<Image>();
     }
     
     private void ResetCalculationPath()
@@ -47,10 +50,14 @@ public class NumbersUI : MonoBehaviour
     {
         if (correct) submitBtnImage.sprite = _submitButtons.correctBtn;
         else submitBtnImage.sprite = _submitButtons.incorrectBtn;
+
+        submitBtn.enabled = false;
     }
 
     public void ResetSubmitButton()
     {
+        submitBtn.enabled = true;
+        
         submitBtnImage.sprite = _submitButtons.defaultBtn;
     }
 

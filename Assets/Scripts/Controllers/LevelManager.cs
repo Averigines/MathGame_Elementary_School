@@ -135,12 +135,12 @@ public class LevelManager : MonoBehaviour
         ChangePoints(type, points, calcPathString);
     }
     
-    private IEnumerator ResultSequence()
+    private IEnumerator ResultSequence(bool correctResult)
     {
         OnResultSequenceStart?.Invoke();
         string calcPathString = GetStringSequenceForCalculationPath(true);
         
-        yield return StartCoroutine(_resultUI.ShowResult(calcPathString));
+        yield return StartCoroutine(_resultUI.ShowResult(calcPathString, correctResult));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(_resultUI.HideResult());
         OnResultSequenceEnd?.Invoke();
@@ -183,6 +183,8 @@ public class LevelManager : MonoBehaviour
             }
         }
 
+        calcPathString ??= "0";
+
         if (endResult)
         {
             calcPathString += " = " + _currPoints;
@@ -193,11 +195,7 @@ public class LevelManager : MonoBehaviour
 
     public void SubmitScore(Button submitBtn)
     {
-        if (_currPoints == _currentLevelData.goalNumber)
-        {
-            _numbersUI.ChangeSubmitButton(true);
-            StartCoroutine(CompleteLevel());
-        }
+        if (_currPoints == _currentLevelData.goalNumber) StartCoroutine(HandleCorrectSubmit());
         else StartCoroutine(HandleIncorrectSubmit());
 
     }
@@ -205,13 +203,14 @@ public class LevelManager : MonoBehaviour
     private IEnumerator HandleIncorrectSubmit()
     {
         _numbersUI.ChangeSubmitButton(false);
-        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(ResultSequence(false));
         _numbersUI.ResetSubmitButton();
     }
 
-    private IEnumerator CompleteLevel()
+    private IEnumerator HandleCorrectSubmit()
     {
-        yield return StartCoroutine(ResultSequence());
+        _numbersUI.ChangeSubmitButton(true);
+        yield return StartCoroutine(ResultSequence(true));
         OnLevelCompleted?.Invoke();
     }
 }

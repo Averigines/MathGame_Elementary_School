@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   current: {fileID: 614192622}
   goal: {fileID: 153671078}
-  submitBtnImage: {fileID: 569042730}
+  submitBtn: {fileID: 569042729}
   submitBtnDefault: {fileID: 21300000, guid: 27d89d715e84e8f4cb3b12437c0614ac, type: 3}
   submitBtnCorrect: {fileID: 21300000, guid: fe86315bd3be9124fa61f38c04b8fe4c, type: 3}
   submitBtnIncorrect: {fileID: 21300000, guid: eb1e06fe938f4b44f851bd59dbf884ba, type: 3}
@@ -1576,10 +1576,10 @@ MonoBehaviour:
       - m_Target: {fileID: 2094450848}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartLevel
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1026024529}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2475,7 +2475,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 1
-  highlightColor: {r: 0, g: 0.3490566, b: 0.033199336, a: 0}
+  highlightColorNew: {r: 0.024919916, g: 0.18388687, b: 0.754717, a: 0}
+  highlightColorCorrect: {r: 0.043856423, g: 0.3679245, b: 0, a: 0}
+  highlightColorIncorrect: {r: 0.6603774, g: 0, b: 0, a: 0}
 --- !u!1 &2094450847
 GameObject:
   m_ObjectHideFlags: 0

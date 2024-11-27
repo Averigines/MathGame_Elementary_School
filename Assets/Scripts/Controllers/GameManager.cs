@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum DirectionX
 {
@@ -75,14 +76,16 @@ public class GameManager : MonoBehaviour
             Debug.Log("All levels completed!");
         }
     }
-    
-    public void RestartLevel()
+
+    public void RestartLevel(Button restartBtn)
     {
+        restartBtn.enabled = false;
+        
         levelManager.StopAllCoroutines();
-        StartCoroutine(RestartLevelSequence());
+        StartCoroutine(RestartLevelSequence(restartBtn));
     }
 
-    private IEnumerator RestartLevelSequence()
+    private IEnumerator RestartLevelSequence(Button restartBtn)
     {
         DisablePlayerActions();
         
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(screenFade.FadeFromBlack());
         
         EnablePlayerActions();
+        restartBtn.enabled = true;
     }
 
     private void DisablePlayerActions()

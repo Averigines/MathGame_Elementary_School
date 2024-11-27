@@ -7,9 +7,18 @@ public class ResultUI : MonoBehaviour
 {
     private TextMeshProUGUI textResult;
     [SerializeField] private float fadeDuration;
-    [SerializeField] private Color highlightColor;
-    private string highlightColorHexCode;
+    [SerializeField] private Color highlightColorNew;
+    [SerializeField] private Color highlightColorCorrect;
+    [SerializeField] private Color highlightColorIncorrect;
 
+    private struct HighlightColorHexCodes
+    {
+        public string hexCodeNew;
+        public string hexCodeCorrect;
+        public string hexCodeIncorrect;
+    }
+    private HighlightColorHexCodes _highlightColors;
+    
     private void Start()
     {
         textResult = GetComponent<TextMeshProUGUI>();
@@ -17,7 +26,9 @@ public class ResultUI : MonoBehaviour
         color.a = 0;
         textResult.color = color;
         
-        highlightColorHexCode = ColorUtility.ToHtmlStringRGB(highlightColor);
+        _highlightColors.hexCodeNew = ColorUtility.ToHtmlStringRGB(highlightColorNew);
+        _highlightColors.hexCodeCorrect = ColorUtility.ToHtmlStringRGB(highlightColorCorrect);
+        _highlightColors.hexCodeIncorrect = ColorUtility.ToHtmlStringRGB(highlightColorIncorrect);
 
         textResult.enabled = false;
     }
@@ -30,22 +41,30 @@ public class ResultUI : MonoBehaviour
         if (lastCatch > 9 || result.Length == 2) firstIndexToColor--;
         int lastIndexToColor = result.Length - 1;
 
-        string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, highlightColorHexCode);
+        string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, _highlightColors.hexCodeNew);
         
         textResult.text = textToShow;
 
         yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
     }
     
-    public IEnumerator ShowResult(string result)
+    public IEnumerator ShowResult(string result, bool correctResult)
     {
         textResult.enabled = true;
 
         int firstIndexToColor = 0;
         int lastIndexToColor = result.Length - 1;
-        
-        string textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, highlightColorHexCode);
-        
+
+        string textToShow = null;
+        if (correctResult)
+        {
+            textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, _highlightColors.hexCodeCorrect);
+        }
+        else
+        {
+            textToShow = InsertColorTags(result, firstIndexToColor, lastIndexToColor, _highlightColors.hexCodeIncorrect);
+        }
+
         textResult.text = textToShow;
 
         yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
