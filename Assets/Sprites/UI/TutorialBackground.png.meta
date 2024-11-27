@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-guid: 06f5327c8a8659b44aa589fd6c0f6660
-AssetOrigin:
-  serializedVersion: 1
-  productId: 97516
-  packageName: 371 Simple Buttons Pack
-  packageVersion: 1.0
-  assetPath: Assets/Simple Buttons/Big Buttons/BigLigthBlue.png
-  uploadId: 194640
+guid: 560490010f0a6544f813b68ac76d61d3
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8890158990985908968
+    second: Rectangle 1 (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -56,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 18, z: 0, w: 18}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -70,9 +66,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -117,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: numbersBackground_0
+      name: TutorialBackground
       rect:
         serializedVersion: 2
         x: 0
-        y: 18
+        y: 0
         width: 440
-        height: 204
+        height: 218
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 13, y: 13, z: 13, w: 13}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: ab2f60bf6ebf12a4886f4bc290a9279e
-      internalID: 1470770325
+      spriteID: 8e2d57e0080306b70800000000000000
+      internalID: 8890158990985908968
       vertices: []
       indices: 
       edges: []
@@ -142,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 524f494820c71b14e8444d011e5478bb
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -152,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      numbersBackground_0: 1470770325
+      TutorialBackground: 8890158990985908968
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
