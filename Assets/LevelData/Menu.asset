@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dbac4b6fd3bea4dadb0f00741b1eaa, type: 3}
+  m_Name: Menu
+  m_EditorClassIdentifier: 
+  levelNumber: 0
+  goalNumber: 100
+  availableFish:
+  - type: 0
+    amount: 3
+    swimEdgeLeft: 0
+    swimEdgeRight: 30
+    spawnPosY: 60
+    speedX: 0.5
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  - type: 0
+    amount: 4
+    swimEdgeLeft: 50
+    swimEdgeRight: 100
+    spawnPosY: 45
+    speedX: 0.6
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  - type: 0
+    amount: 2
+    swimEdgeLeft: 30
+    swimEdgeRight: 60
+    spawnPosY: 15
+    speedX: 0.2
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  - type: 1
+    amount: 5
+    swimEdgeLeft: 20
+    swimEdgeRight: 80
+    spawnPosY: 35
+    speedX: 0.8
+    prefab: {fileID: 5291280172514582875, guid: 26d6d8a60f2c20648a34dbb2ab850603, type: 3}
+  - type: 0
+    amount: 1
+    swimEdgeLeft: 40
+    swimEdgeRight: 70
+    spawnPosY: 23
+    speedX: 0.9
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  - type: 1
+    amount: 3
+    swimEdgeLeft: 10
+    swimEdgeRight: 89
+    spawnPosY: 90
+    speedX: 1.3
+    prefab: {fileID: 5291280172514582875, guid: 26d6d8a60f2c20648a34dbb2ab850603, type: 3}
+  - type: 0
+    amount: 7
+    swimEdgeLeft: 20
+    swimEdgeRight: 60
+    spawnPosY: 75
+    speedX: 0.6
+    prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  allowNegativeNumbers: 0
+  includeMultiplication: 0
+  timeLimit: 0

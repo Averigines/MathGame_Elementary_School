@@ -7,11 +7,22 @@ public class ScreenFade : MonoBehaviour
 {
     private RawImage _fadeImage;
     [SerializeField] private float _fadeDuration = 1.0f;
+    
+    private static bool _isFirstScene = true; 
 
     private void Start()
     {
         _fadeImage = GetComponent<RawImage>();
-        _fadeImage.enabled = false;
+
+        if (_isFirstScene)
+        {
+            _fadeImage.enabled = false;
+            _isFirstScene = false;
+        }
+        else
+        {
+            StartCoroutine(FadeFromBlack());
+        }
     }
     
     public IEnumerator FadeToBlack()

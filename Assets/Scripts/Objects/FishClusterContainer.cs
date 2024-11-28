@@ -103,14 +103,7 @@ public class FishClusterContainer : MonoBehaviour
                 break;
         }
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 newPosition = transform.position;
@@ -144,7 +137,7 @@ public class FishClusterContainer : MonoBehaviour
 
         transform.position = newPosition;
 
-        if (ScreenData.CheckIfFishClusterNeedsToTurn(_directionX, transform.position, _fishAreaX))
+        if (ScreenManager.CheckIfFishClusterNeedsToTurn(_directionX, transform.position, _fishAreaX))
         {
             _directionX = _directionX == DirectionX.Left ? DirectionX.Right : DirectionX.Left;
             foreach (var fish in _fishInContainer)

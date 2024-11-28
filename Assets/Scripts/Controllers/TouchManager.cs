@@ -24,19 +24,19 @@ public class TouchManager : MonoBehaviour
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
 
-        if (worldPoint.y < ScreenData.backgroundArea.top && worldPoint.y > ScreenData.backgroundArea.bottom &&
+        if (worldPoint.y < ScreenManager.backgroundArea.top && worldPoint.y > ScreenManager.backgroundArea.bottom &&
             player.ValidStatesForMoving.Contains(player.CurrPlayerState))
         {
             player.SetTargetPosition(worldPoint.x);
         }
         
-        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+        else if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
             player.ValidStatesForFishing.Contains(player.CurrPlayerState))
         {
             player.StartFishing();
         }
         
-        else if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+        else if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
                  player.CurrPlayerState == Player.PlayerState.Fishing)
         {
             player.StopFishing(Player.PlayerState.Idle);
@@ -53,7 +53,7 @@ public class TouchManager : MonoBehaviour
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
         
-        if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+        if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
             player.CurrPlayerState == Player.PlayerState.Fishing)
         {
             player.StartAcceleratingFishingRod();
@@ -68,7 +68,7 @@ public class TouchManager : MonoBehaviour
         Vector2 touchPos = touch.position.ReadValue();
         Vector3 worldPoint = _mainCamera.ScreenToWorldPoint(new Vector3(touchPos.x, touchPos.y, _mainCamera.nearClipPlane));
         
-        if (worldPoint.y < ScreenData.seaArea.top && worldPoint.y > ScreenData.seaArea.bottom &&
+        if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
             player.CurrPlayerState == Player.PlayerState.Fishing)
         {
             player.StartDeceleratingFishingRod();

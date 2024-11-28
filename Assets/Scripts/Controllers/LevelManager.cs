@@ -58,10 +58,10 @@ public class LevelManager : MonoBehaviour
     
     private void SpawnFishCluster(FishData fishData)
     {
-        var fishAreaX = ScreenData.GetFishAreaX(fishData.swimEdgeLeft, fishData.swimEdgeRight);
-        var startPos = ScreenData.GetFishSpawnPos(fishData.spawnPosY, fishAreaX);
-        DirectionX directionX = ScreenData.CoinToss() ? DirectionX.Left : DirectionX.Right;
-        DirectionY directionY = ScreenData.CoinToss() ? DirectionY.Up : DirectionY.Down;
+        var fishAreaX = ScreenManager.GetFishAreaX(fishData.swimEdgeLeft, fishData.swimEdgeRight);
+        var startPos = ScreenManager.GetFishSpawnPos(fishData.spawnPosY, fishAreaX);
+        DirectionX directionX = ScreenManager.CoinToss() ? DirectionX.Left : DirectionX.Right;
+        DirectionY directionY = ScreenManager.CoinToss() ? DirectionY.Up : DirectionY.Down;
         
         GameObject go = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
         _fishClusters.Add(go);

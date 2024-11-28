@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum DirectionX
@@ -17,6 +18,7 @@ public enum DirectionY
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LevelData[] allLevels;
+    [SerializeField] private ScreenManager screenManager;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private TouchManager touchManager;
     [SerializeField] private ScreenFade screenFade;
@@ -97,6 +99,20 @@ public class GameManager : MonoBehaviour
         EnablePlayerActions();
         restartBtn.enabled = true;
     }
+
+    public void GoToMenu()
+    {
+        StartCoroutine(GoToMenuSequence());
+    }
+
+    private IEnumerator GoToMenuSequence()
+    {
+        DisablePlayerActions();
+        yield return StartCoroutine(screenFade.FadeToBlack());
+
+        SceneManager.LoadScene(0);
+    }
+
 
     private void DisablePlayerActions()
     {

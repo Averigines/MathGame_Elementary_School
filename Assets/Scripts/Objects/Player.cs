@@ -123,8 +123,8 @@ public class Player : MonoBehaviour
     {
         ChangePlayerState(PlayerState.Fishing);
         var go = Instantiate(fishingRodHookPrefab, fishingRod.transform);
-        var minFishingHookDepth = ScreenData.seaArea.top;
-        var maxFishingHookDepth = ScreenData.seaArea.bottom;
+        var minFishingHookDepth = ScreenManager.seaArea.top;
+        var maxFishingHookDepth = ScreenManager.seaArea.bottom;
         _activeFishingHook = go.GetComponent<FishingRodHook>();
         _activeFishingHook.Initialize(minFishingHookDepth, maxFishingHookDepth);
     }
