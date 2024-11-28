@@ -73,10 +73,6 @@ public class GameManager : MonoBehaviour
             _currentLevelIndex++;
             levelManager.InitializeLevel(allLevels[_currentLevelIndex]);
         }
-        else
-        {
-            Debug.Log("All levels completed!");
-        }
     }
 
     public void RestartLevel(Button restartBtn)

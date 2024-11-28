@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class FishClusterContainer : MonoBehaviour
 {
+    [SerializeField] private Canvas textCanvas;
+    [SerializeField] private TextMeshProUGUI textMesh;
+    [SerializeField] private Vector2 textOffset = new Vector2(0.3f, 0.3f);
+
+    [SerializeField] private FishingRange fishingRange;
+    
     private float _timer = 0f;
     private List<Fish> _fishInContainer;
     private DirectionX _directionX;
@@ -16,15 +22,21 @@ public class FishClusterContainer : MonoBehaviour
     private float _radius = 0.4f;
     private Vector2 _fishAreaX;
 
+    private CircleCollider2D _collider;
+
     private struct YRange
     {
         public float min;
         public float max;
     }
     private YRange _yRange;
-
-    [SerializeField] private Vector2 textOffset = new Vector2(0.3f, 0.3f);
+    
     public event Action<FishType, int> OnFishReeledIn;
+
+    private void Awake()
+    {
+        _collider = gameObject.GetComponent<CircleCollider2D>();
+    }
 
     public void Initialize(FishData fishData, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
     {
@@ -41,6 +53,8 @@ public class FishClusterContainer : MonoBehaviour
 
         SpawnFishInContainer(fishData);
         SetupValueText(textOffset);
+        SetColliderSize();
+        SetFishingRangeSize();
     }
 
     private void SpawnFishInContainer(FishData fishData)
@@ -86,22 +100,35 @@ public class FishClusterContainer : MonoBehaviour
                 mostRightFishLocalPos = new Vector2(fish.transform.localPosition.x, fish.transform.localPosition.y);
             }
         }
-
-        Canvas canvasValue = GetComponentInChildren<Canvas>();
-        canvasValue.transform.localPosition = mostRightFishLocalPos + offset;
         
-        TextMeshProUGUI textValue = GetComponentInChildren<TextMeshProUGUI>();
+        textCanvas.transform.localPosition = mostRightFishLocalPos + offset;
+
         switch (_type)
         {
             case FishType.Addition:
-                textValue.text = "+" + _value;
-                textValue.color = Color.red;
+                textMesh.text = "+" + _value;
+                textMesh.color = Color.red;
                 break;
             case FishType.Substraction:
-                textValue.text = "-" + _value;
-                textValue.color = Color.blue;
+                textMesh.text = "-" + _value;
+                textMesh.color = Color.blue;
                 break;
         }
+    }
+
+    private void SetColliderSize()
+    {
+        var edgeFish = _fishInContainer[^1];
+        var edgeFishRenderer = edgeFish.gameObject.GetComponent<SpriteRenderer>();
+        var radius = edgeFish.transform.localPosition.magnitude + edgeFishRenderer.bounds.extents.magnitude;
+
+        _collider.radius = radius;
+    }
+
+    private void SetFishingRangeSize()
+    {
+        var diameter = _collider.radius * 2;
+        fishingRange.transform.localScale = new Vector3(diameter, diameter, diameter);
     }
     
     void Update()
@@ -149,10 +176,16 @@ public class FishClusterContainer : MonoBehaviour
         if (transform.position.y > _yRange.max && _directionY == DirectionY.Up) _directionY = DirectionY.Down;
         if (transform.position.y < _yRange.min && _directionY == DirectionY.Down) _directionY = DirectionY.Up;
     }
+    
+    public bool CanGetReeledIn()
+    {
+        return fishingRange.CanBeReeledIn;
+    }
 
     public void GetReeledIn()
     {
         OnFishReeledIn?.Invoke(_type, _value);
         Destroy(gameObject);
     }
+    
 }

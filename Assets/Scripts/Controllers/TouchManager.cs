@@ -28,18 +28,41 @@ public class TouchManager : MonoBehaviour
             player.ValidStatesForMoving.Contains(player.CurrPlayerState))
         {
             player.SetTargetPosition(worldPoint.x);
+            return;
         }
         
-        else if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
+        if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
             player.ValidStatesForFishing.Contains(player.CurrPlayerState))
         {
             player.StartFishing();
+            return;
         }
         
-        else if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
+        if (player.CurrPlayerState == Player.PlayerState.Fishing)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+            
+            if (hit.collider != null)
+            {
+                if (hit.collider.CompareTag("Fish"))
+                {
+                    if (hit.transform.TryGetComponent<FishClusterContainer>(out FishClusterContainer cluster))
+                    {
+                        if (cluster.CanGetReeledIn())
+                        {
+                            cluster.GetReeledIn();
+                            return;
+                        } 
+                    }
+                }
+            }
+        }
+        
+        if (worldPoint.y < ScreenManager.seaArea.top && worldPoint.y > ScreenManager.seaArea.bottom &&
                  player.CurrPlayerState == Player.PlayerState.Fishing)
         {
             player.StopFishing(Player.PlayerState.Idle);
+            return;
         }
     }
 

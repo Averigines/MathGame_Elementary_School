@@ -17,51 +17,51 @@ MonoBehaviour:
   availableFish:
   - type: 0
     amount: 3
-    swimEdgeLeft: 0
-    swimEdgeRight: 30
-    spawnPosY: 60
+    swimEdgeLeft: 0.33
+    swimEdgeRight: 0.833
+    spawnPosY: 0.103
     speedX: 0.5
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 4
-    swimEdgeLeft: 50
-    swimEdgeRight: 100
-    spawnPosY: 45
+    swimEdgeLeft: 0.187
+    swimEdgeRight: 0.517
+    spawnPosY: 0.246
     speedX: 0.6
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 0
     amount: 2
-    swimEdgeLeft: 30
-    swimEdgeRight: 60
-    spawnPosY: 15
+    swimEdgeLeft: 0.291
+    swimEdgeRight: 0.882
+    spawnPosY: 0.394
     speedX: 0.2
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 1
     amount: 5
-    swimEdgeLeft: 20
-    swimEdgeRight: 80
-    spawnPosY: 35
+    swimEdgeLeft: 0.03
+    swimEdgeRight: 0.197
+    spawnPosY: 0.542
     speedX: 0.8
     prefab: {fileID: 5291280172514582875, guid: 26d6d8a60f2c20648a34dbb2ab850603, type: 3}
   - type: 0
     amount: 1
-    swimEdgeLeft: 40
-    swimEdgeRight: 70
-    spawnPosY: 23
+    swimEdgeLeft: 0.458
+    swimEdgeRight: 1
+    spawnPosY: 0.66
     speedX: 0.9
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   - type: 1
     amount: 3
-    swimEdgeLeft: 10
-    swimEdgeRight: 89
-    spawnPosY: 90
+    swimEdgeLeft: 0
+    swimEdgeRight: 0.66
+    spawnPosY: 0.793
     speedX: 1.3
     prefab: {fileID: 5291280172514582875, guid: 26d6d8a60f2c20648a34dbb2ab850603, type: 3}
   - type: 0
     amount: 7
-    swimEdgeLeft: 20
-    swimEdgeRight: 60
-    spawnPosY: 75
+    swimEdgeLeft: 0.192
+    swimEdgeRight: 0.808
+    spawnPosY: 0.926
     speedX: 0.6
     prefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
   allowNegativeNumbers: 0

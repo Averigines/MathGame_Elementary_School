@@ -13,9 +13,9 @@ public class FishData
 {
     public FishType type;
     public int amount;
-    public float swimEdgeLeft; //in percent
-    public float swimEdgeRight; //in percent
-    public float spawnPosY; //in percent from top
+    [Range(0, 1)] public float swimEdgeLeft;
+    [Range(0, 1)] public float swimEdgeRight;
+    [Range(0, 1)] public float spawnPosY;
     public float speedX;
     public GameObject prefab;
 }

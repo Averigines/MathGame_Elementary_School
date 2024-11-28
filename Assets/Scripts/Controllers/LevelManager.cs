@@ -44,8 +44,6 @@ public class LevelManager : MonoBehaviour
         background.ChangeBackground();
         
         _currentLevelData = levelData;
-        Debug.Log($"Level {_currentLevelData.levelNumber}");
-        Debug.Log($"Goal Number: {_currentLevelData.goalNumber}");
 
         foreach (FishData fish in _currentLevelData.availableFish)
         {

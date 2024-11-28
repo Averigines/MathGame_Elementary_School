@@ -218,16 +218,16 @@ public class ScreenManager : MonoBehaviour
 
     public static Vector2 GetFishAreaX(float left, float right)
     {
-        Vector2 fishAreaX = new Vector2(fishArea.left + (left / 100f) * (fishArea.right - fishArea.left),
-            fishArea.left + (right / 100f) * (fishArea.right - fishArea.left));
+        Vector2 fishAreaX = new Vector2(fishArea.left + left * (fishArea.right - fishArea.left),
+            fishArea.left + right * (fishArea.right - fishArea.left));
 
         return fishAreaX;
     }
     
-    public static Vector2 GetFishSpawnPos(float posInPercentY, Vector2 fishAreaX)
+    public static Vector2 GetFishSpawnPos(float posY, Vector2 fishAreaX)
     {
         float spawnPositionX = Random.Range(fishAreaX.x, fishAreaX.y);
-        float spawnPositionY = fishArea.top + (posInPercentY / 100f) * (fishArea.bottom - fishArea.top);
+        float spawnPositionY = fishArea.top + posY * (fishArea.bottom - fishArea.top);
         Vector2 spawnPosition = new Vector2(spawnPositionX, spawnPositionY);
 
         return spawnPosition;

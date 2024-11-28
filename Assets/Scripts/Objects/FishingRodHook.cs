@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,10 +67,12 @@ public class FishingRodHook : MonoBehaviour
     {
         if (other.CompareTag("Fish"))
         {
-            if (other.gameObject.TryGetComponent<FishClusterContainer>(out FishClusterContainer fishCluster))
-            {
-                fishCluster.GetReeledIn();
-            }
+            other.gameObject.GetComponentInChildren<FishingRange>().SetToActive();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        other.gameObject.GetComponentInChildren<FishingRange>().SetToInactive();
     }
 }
