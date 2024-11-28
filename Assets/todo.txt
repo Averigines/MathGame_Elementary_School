@@ -1,0 +1,7 @@
+TODO:
+
+Add fisher anim for catching a fish
+Create multiplication fish
+Maybe change existing fish to be more pretty
+Add different levels
+Add videos and HowToPlay section
