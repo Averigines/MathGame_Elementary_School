@@ -10,6 +10,9 @@ public class FishClusterContainer : MonoBehaviour
     [SerializeField] private Vector2 textOffset = new Vector2(0.3f, 0.3f);
 
     [SerializeField] private FishingRange fishingRange;
+
+    [SerializeField] private float fishMinScale = 0.7f;
+    [SerializeField] private float fishMaxScale = 1.3f;
     
     private float _timer = 0f;
     private List<Fish> _fishInContainer;
@@ -76,11 +79,14 @@ public class FishClusterContainer : MonoBehaviour
                 float x = transform.position.x + _radius * ringIndex * Mathf.Cos(angle);
                 float y = transform.position.y + _radius * ringIndex * Mathf.Sin(angle);
                 Vector3 fishPosition = new Vector3(x, y, transform.position.z);
+                
+                //Calculate size
+                float size = Utils.GetRandomNumber(fishMinScale, fishMaxScale);
 
                 // Instantiate fish
                 var go = Instantiate(fishData.prefab, fishPosition, Quaternion.identity, transform);
                 var fish = go.GetComponent<Fish>();
-                fish.Initialize(_directionX);
+                fish.Initialize(size, _directionX);
                 _fishInContainer.Add(fish);
 
                 fishPlaced++;

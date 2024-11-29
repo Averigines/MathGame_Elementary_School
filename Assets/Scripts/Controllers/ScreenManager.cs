@@ -210,11 +210,6 @@ public class ScreenManager : MonoBehaviour
         reflectionCamera.enabled = true;
         reflectionCamera.Render();
     }
-    
-    public static bool CoinToss()
-    {
-        return Random.Range(0, 2) == 0;
-    }
 
     public static Vector2 GetFishAreaX(float left, float right)
     {
@@ -226,7 +221,7 @@ public class ScreenManager : MonoBehaviour
     
     public static Vector2 GetFishSpawnPos(float posY, Vector2 fishAreaX)
     {
-        float spawnPositionX = Random.Range(fishAreaX.x, fishAreaX.y);
+        float spawnPositionX = Utils.GetRandomNumber(fishAreaX.x, fishAreaX.y);
         float spawnPositionY = fishArea.top + posY * (fishArea.bottom - fishArea.top);
         Vector2 spawnPosition = new Vector2(spawnPositionX, spawnPositionY);
 

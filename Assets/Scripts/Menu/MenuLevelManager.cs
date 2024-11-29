@@ -16,8 +16,8 @@ public class MenuLevelManager : MonoBehaviour
     {
         var fishAreaX = ScreenManager.GetFishAreaX(fishData.swimEdgeLeft, fishData.swimEdgeRight);
         var startPos = ScreenManager.GetFishSpawnPos(fishData.spawnPosY, fishAreaX);
-        DirectionX directionX = ScreenManager.CoinToss() ? DirectionX.Left : DirectionX.Right;
-        DirectionY directionY = ScreenManager.CoinToss() ? DirectionY.Up : DirectionY.Down;
+        DirectionX directionX = Utils.CoinToss() ? DirectionX.Left : DirectionX.Right;
+        DirectionY directionY = Utils.CoinToss() ? DirectionY.Up : DirectionY.Down;
         
         GameObject go = Instantiate(fishClusterContainerPrefab, startPos, Quaternion.identity);
         var fishCluster = go.GetComponent<FishClusterContainer>();
