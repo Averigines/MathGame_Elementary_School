@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
 
     private void HandleFishReeledIn(FishType type, int points)
     {
-        player.StopFishing(Player.PlayerState.Idle);
+        player.StopFishing(Player.PlayerState.Hooking);
         StartCoroutine(CatchFishSequence(type, points));
     }
 

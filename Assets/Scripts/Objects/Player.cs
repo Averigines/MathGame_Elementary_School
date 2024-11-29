@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -16,7 +17,16 @@ public class Player : MonoBehaviour
         Idle,
         Fishing,
         Moving,
+        Hooking,
     }
+
+    private readonly Dictionary<PlayerState, string> _playerStateToAnimationTriggerMap = new Dictionary<PlayerState, string>()
+    { 
+        { PlayerState.Idle , "Idle" },
+        { PlayerState.Moving , "Rowing" },
+        { PlayerState.Fishing , "Fishing" },
+        { PlayerState.Hooking , "Hooking" }
+    };
 
     public PlayerState CurrPlayerState {get; private set;}
     public PlayerState[] ValidStatesForMoving {get; private set;}
@@ -37,7 +47,7 @@ public class Player : MonoBehaviour
         _targetPosition = transform.position;
 
         _renderer = playerModel.GetComponent<SpriteRenderer>();
-        _animator = playerModel.GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
     
     void Update()
@@ -159,26 +169,10 @@ public class Player : MonoBehaviour
     {
         if (state == CurrPlayerState) return;
 
-        CurrPlayerState = state;
-
-        _animator.ResetTrigger("Idle");
-        _animator.ResetTrigger("Rowing");
-        _animator.ResetTrigger("Fishing");
+        _animator.ResetTrigger(_playerStateToAnimationTriggerMap[CurrPlayerState]);
         
-        switch (CurrPlayerState)
-        {
-            case PlayerState.Idle:
-                _animator.SetTrigger("Idle");
-                break;
-            case PlayerState.Moving:
-                _animator.SetTrigger("Rowing");
-                break;
-            case PlayerState.Fishing:
-                _animator.SetTrigger("Fishing");
-                break;
-            default:
-                _animator.SetTrigger("Idle");
-                break;
-        }
+        CurrPlayerState = state;
+        
+        _animator.SetTrigger(_playerStateToAnimationTriggerMap[CurrPlayerState]);
     }
 }

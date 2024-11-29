@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3869335720624603475}
   - component: {fileID: 7747033130941141475}
+  - component: {fileID: 2680591334799545939}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -81,6 +82,28 @@ MonoBehaviour:
   fishingRod: {fileID: 2981938955606020531}
   speed: 2
   fishingRodHookPrefab: {fileID: 4687320725964454341, guid: e832f6ea3c06bd94dbe630ae6b35e943, type: 3}
+--- !u!95 &2680591334799545939
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3796782828300221944}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3e9401d8bbca5c7438696fab66a47ed6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7556297715718167853
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3956455948447156814}
   - component: {fileID: 1339271524307167313}
-  - component: {fileID: 9204745227736700999}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -169,25 +191,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &9204745227736700999
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7556297715718167853}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3e9401d8bbca5c7438696fab66a47ed6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

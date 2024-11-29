@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerIdle
+  m_Name: PlayerHooking
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,19 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 3390290538466982040, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
+      value: {fileID: 1429623626486949963, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - time: 0.16666667
+      value: {fileID: 7806218693691028574, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - time: 0.33333334
+      value: {fileID: -4741671334643792231, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
     - time: 0.5
-      value: {fileID: 1330322765076906990, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
+      value: {fileID: 4920048703010108917, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - time: 0.6666667
+      value: {fileID: -3689931269022385018, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - time: 0.8333333
+      value: {fileID: 2602871329662890716, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
     - time: 0.98333335
-      value: {fileID: 1330322765076906990, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
+      value: {fileID: 2602871329662890716, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
     attribute: m_Sprite
     path: PlayerModel
     classID: 212
@@ -48,9 +56,13 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 3390290538466982040, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
-    - {fileID: 1330322765076906990, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
-    - {fileID: 1330322765076906990, guid: d640be8d065e5354cb226cb7ca060b67, type: 3}
+    - {fileID: 1429623626486949963, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: 7806218693691028574, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: -4741671334643792231, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: 4920048703010108917, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: -3689931269022385018, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: 2602871329662890716, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
+    - {fileID: 2602871329662890716, guid: 57fc7a5102e9dee49becb413888cc8d3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -61,7 +73,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 1
+    m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -75,4 +87,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1
+    functionName: ChangePlayerState
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
