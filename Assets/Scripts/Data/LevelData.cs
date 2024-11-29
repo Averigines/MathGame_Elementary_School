@@ -4,6 +4,7 @@ using UnityEngine;
 public class LevelData : ScriptableObject
 {
     public int levelNumber;
+    public int startNumber;
     public int goalNumber;
     public FishData[] availableFish; // Array of fish types available in this level
     public bool allowNegativeNumbers; // For advanced levels

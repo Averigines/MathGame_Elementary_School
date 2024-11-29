@@ -22,8 +22,30 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private NumbersUI _numbersUI;
 
     public event Action OnLevelCompleted;
-    public event Action OnResultSequenceStart;
-    public event Action OnResultSequenceEnd;
+    public event Action OnShowCalcPathStart;
+    public event Action OnShowCalcPathEnd;
+
+    private void OnEnable()
+    {
+        OnShowCalcPathStart += DisableButtonsWhenShowingCalcPath;
+        OnShowCalcPathEnd += EnableButtonsWhenFinishShowingCalcPath;
+    }
+
+    private void OnDisable()
+    {
+        OnShowCalcPathStart -= DisableButtonsWhenShowingCalcPath;
+        OnShowCalcPathEnd -= EnableButtonsWhenFinishShowingCalcPath;
+    }
+    
+    private void DisableButtonsWhenShowingCalcPath()
+    {
+        _numbersUI.ChangeSubmitButton(false);
+    }
+
+    private void EnableButtonsWhenFinishShowingCalcPath()
+    {
+        _numbersUI.ResetSubmitButton();
+    }
 
     public void InitializeLevel(LevelData levelData)
     {
@@ -35,23 +57,25 @@ public class LevelManager : MonoBehaviour
             }
         }
         _fishClusters = new List<GameObject>();
-        _calculationPath = new List<Tuple<FishType, int>>();
-        
+
         player.ResetPosition();
         player.ChangePlayerState(Player.PlayerState.Idle);
-        _currPoints = 0;
-        
+
         background.ChangeBackground();
-        
+
         _currentLevelData = levelData;
+        
+        _resultUI.ResetForNewLevel();
+        _numbersUI.ResetForNewLevel(_currentLevelData.startNumber, _currentLevelData.goalNumber);
+
+        _currPoints = _currentLevelData.startNumber;
+        _calculationPath = new List<Tuple<FishType, int>> { new Tuple<FishType, int>(FishType.Addition, _currPoints) };
+        StartCoroutine(ShowStartNumberSequence());
 
         foreach (FishData fish in _currentLevelData.availableFish)
         {
             SpawnFishCluster(fish);
         }
-
-        _numbersUI.ResetForNewLevel(_currentLevelData.goalNumber);
-        _resultUI.ResetForNewLevel();
     }
     
     private void SpawnFishCluster(FishData fishData)
@@ -69,39 +93,21 @@ public class LevelManager : MonoBehaviour
         fishCluster.OnFishReeledIn += HandleFishReeledIn;
     }
 
+    private IEnumerator ShowStartNumberSequence()
+    {
+        OnShowCalcPathStart?.Invoke();
+        string calcPathString = GetStringSequenceForCalculationPath(false);
+        
+        yield return StartCoroutine(_resultUI.ShowStartNumber(calcPathString));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_resultUI.HideUI());
+        OnShowCalcPathEnd?.Invoke();
+    }
+
     private void HandleFishReeledIn(FishType type, int points)
     {
         player.StopFishing(Player.PlayerState.Hooking);
         StartCoroutine(CatchFishSequence(type, points));
-    }
-
-    private void ChangePoints(FishType type, int points, string calcPathString)
-    {
-        switch (type)
-        {
-            case FishType.Addition:
-                IncreasePoints(points);
-                break;
-            case FishType.Substraction:
-                SubstractPoints(points);
-                break;
-            default:
-                break;
-        }
-
-        _numbersUI.ChangeCalculationPath(calcPathString);
-    }
-
-    private void IncreasePoints(int points)
-    {
-        _currPoints += points;
-        print(_currPoints);
-    }
-
-    private void SubstractPoints(int points)
-    {
-        _currPoints -= points;
-        print(_currPoints);
     }
 
     private IEnumerator CatchFishSequence(FishType type, int points)
@@ -114,6 +120,9 @@ public class LevelManager : MonoBehaviour
             case FishType.Substraction:
                 _calculationPath.Add(new Tuple<FishType, int>(FishType.Substraction, points));
                 break;
+            case FishType.Multiplication:
+                _calculationPath.Add(new Tuple<FishType, int>(FishType.Multiplication, points));
+                break;
             default:
                 break;
         }
@@ -123,25 +132,60 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ResultSequence(FishType type, int points)
     {
-        OnResultSequenceStart?.Invoke();
+        OnShowCalcPathStart?.Invoke();
         string calcPathString = GetStringSequenceForCalculationPath(false);
         
         yield return StartCoroutine(_resultUI.ShowResult(calcPathString, points));
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_resultUI.HideResult());
-        OnResultSequenceEnd?.Invoke();
+        yield return StartCoroutine(_resultUI.HideUI());
+        OnShowCalcPathEnd?.Invoke();
         ChangePoints(type, points, calcPathString);
     }
     
     private IEnumerator ResultSequence(bool correctResult)
     {
-        OnResultSequenceStart?.Invoke();
+        OnShowCalcPathStart?.Invoke();
         string calcPathString = GetStringSequenceForCalculationPath(true);
         
         yield return StartCoroutine(_resultUI.ShowResult(calcPathString, correctResult));
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(_resultUI.HideResult());
-        OnResultSequenceEnd?.Invoke();
+        yield return StartCoroutine(_resultUI.HideUI());
+        OnShowCalcPathEnd?.Invoke();
+    }
+    
+    private void ChangePoints(FishType type, int points, string calcPathString)
+    {
+        switch (type)
+        {
+            case FishType.Addition:
+                IncreasePoints(points);
+                break;
+            case FishType.Substraction:
+                SubstractPoints(points);
+                break;
+            case FishType.Multiplication:
+                MultiplyPoints(points);
+                break;
+            default:
+                break;
+        }
+
+        _numbersUI.ChangeCalculationPath(calcPathString);
+    }
+
+    private void IncreasePoints(int points)
+    {
+        _currPoints += points;
+    }
+
+    private void SubstractPoints(int points)
+    {
+        _currPoints -= points;
+    }
+
+    private void MultiplyPoints(int points)
+    {
+        _currPoints *= points;
     }
 
     private string GetStringSequenceForCalculationPath(bool endResult)
@@ -154,17 +198,7 @@ public class LevelManager : MonoBehaviour
             if (firstCalc)
             {
                 firstCalc = false;
-                switch (calc.Item1)
-                {
-                    case FishType.Addition:
-                        calcPathString = calc.Item2.ToString();
-                        break;
-                    case FishType.Substraction:
-                        calcPathString = "-" + calc.Item2;
-                        break;
-                    default:
-                        break;
-                }
+                calcPathString = calc.Item2.ToString();
                 continue;
             }
 
@@ -175,6 +209,9 @@ public class LevelManager : MonoBehaviour
                     break;
                 case FishType.Substraction:
                     calcPathString += " - " + calc.Item2;
+                    break;
+                case FishType.Multiplication:
+                    calcPathString += " * " + calc.Item2;
                     break;
                 default:
                     break;

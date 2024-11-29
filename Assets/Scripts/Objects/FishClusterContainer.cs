@@ -13,7 +13,13 @@ public class FishClusterContainer : MonoBehaviour
 
     [SerializeField] private float fishMinScale = 0.7f;
     [SerializeField] private float fishMaxScale = 1.3f;
-    
+
+    [SerializeField] private Color textColorAddition;
+    [SerializeField] private Color textColorSubstraction;
+    [SerializeField] private Color textColorMultiplication;
+
+    private Dictionary<FishType, Tuple<string, Color>> _fishTypeToFishTextMap;
+
     private float _timer = 0f;
     private List<Fish> _fishInContainer;
     private DirectionX _directionX;
@@ -39,6 +45,12 @@ public class FishClusterContainer : MonoBehaviour
     private void Awake()
     {
         _collider = gameObject.GetComponent<CircleCollider2D>();
+        _fishTypeToFishTextMap = new Dictionary<FishType, Tuple<string, Color>>()
+        {
+            { FishType.Addition, new Tuple<string, Color>("+", textColorAddition) },
+            { FishType.Substraction, new Tuple<string, Color>("-", textColorSubstraction) },
+            { FishType.Multiplication, new Tuple<string, Color>("*", textColorMultiplication) },
+        };
     }
 
     public void Initialize(FishData fishData, float startPosY, Vector2 fishAreaX, DirectionX directionX, DirectionY directionY)
@@ -109,17 +121,8 @@ public class FishClusterContainer : MonoBehaviour
         
         textCanvas.transform.localPosition = mostRightFishLocalPos + offset;
 
-        switch (_type)
-        {
-            case FishType.Addition:
-                textMesh.text = "+" + _value;
-                textMesh.color = Color.red;
-                break;
-            case FishType.Substraction:
-                textMesh.text = "-" + _value;
-                textMesh.color = Color.blue;
-                break;
-        }
+        textMesh.text = _fishTypeToFishTextMap[_type].Item1 + _value;
+        textMesh.color = _fishTypeToFishTextMap[_type].Item2;
     }
 
     private void SetColliderSize()

@@ -31,9 +31,9 @@ public class NumbersUI : MonoBehaviour
         submitBtnImage = submitBtn.GetComponent<Image>();
     }
     
-    private void ResetCalculationPath()
+    private void ResetCalculationPath(int startNumber)
     {
-        current.text = "0";
+        current.text = startNumber.ToString();
     }
 
     public void ChangeCalculationPath(string calc)
@@ -61,9 +61,9 @@ public class NumbersUI : MonoBehaviour
         submitBtnImage.sprite = _submitButtons.defaultBtn;
     }
 
-    public void ResetForNewLevel(int goalNumber)
+    public void ResetForNewLevel(int startNumber, int goalNumber)
     {
-        ResetCalculationPath();
+        ResetCalculationPath(startNumber);
         ChangeGoalNumber(goalNumber);
         ResetSubmitButton();
     }

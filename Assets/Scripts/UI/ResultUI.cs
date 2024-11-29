@@ -32,6 +32,13 @@ public class ResultUI : MonoBehaviour
 
         textResult.enabled = false;
     }
+    
+    public IEnumerator ShowStartNumber(string number)
+    {
+        textResult.enabled = true;
+        textResult.text = "Start Number: " + number;
+        yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
+    }
 
     public IEnumerator ShowResult(string result, int lastCatch)
     {
@@ -70,7 +77,7 @@ public class ResultUI : MonoBehaviour
         yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
     }
 
-    public IEnumerator HideResult()
+    public IEnumerator HideUI()
     {
         yield return textResult.DOFade(0, fadeDuration).WaitForCompletion();
         textResult.enabled = false;

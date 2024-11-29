@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dbac4b6fd3bea4dadb0f00741b1eaa, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  levelNumber: 3
+  startNumber: 5
+  goalNumber: 35
+  availableFish:
+  - type: 2
+    amount: 5
+    swimEdgeLeft: 0.064
+    swimEdgeRight: 0.768
+    spawnPosY: 0.246
+    speedX: 0.43
+    prefab: {fileID: 5291280172514582875, guid: 3908604a6fc245b438799be6b93c2cef, type: 3}
+  - type: 2
+    amount: 7
+    swimEdgeLeft: 0.177
+    swimEdgeRight: 0.571
+    spawnPosY: 0.527
+    speedX: 0.78
+    prefab: {fileID: 5291280172514582875, guid: 3908604a6fc245b438799be6b93c2cef, type: 3}
+  - type: 2
+    amount: 3
+    swimEdgeLeft: 0.522
+    swimEdgeRight: 0.961
+    spawnPosY: 0.803
+    speedX: 0.65
+    prefab: {fileID: 5291280172514582875, guid: 3908604a6fc245b438799be6b93c2cef, type: 3}
+  allowNegativeNumbers: 0
+  includeMultiplication: 0
+  timeLimit: 0
