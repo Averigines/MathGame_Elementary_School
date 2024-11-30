@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Random = UnityEngine.Random;
 
 public static class Utils
@@ -20,9 +22,35 @@ public static class Utils
     
     public static int GetRandomNumber(int min, int max, int exclude)
     {
-        int num = Random.Range(min, max);
-        if (num >= exclude) num++;
-        return num;
+        HashSet<int> validNumbers = new HashSet<int>();
+        for (int i = min; i <= max; i++)
+        {
+            validNumbers.Add(i);
+        }
+        validNumbers.Remove(exclude);
+        return validNumbers.Count == 0 ? GetRandomNumber(min, max) : GetRandomNumber(validNumbers);
+    }
+    
+    public static int GetRandomNumber(int min, int max, HashSet<int> exclude)
+    {
+        HashSet<int> validNumbers = new HashSet<int>();
+        for (int i = min; i <= max; i++)
+        {
+            validNumbers.Add(i);
+        }
+
+        foreach (var val in exclude)
+        {
+            validNumbers.Remove(val);
+        }
+
+        return validNumbers.Count == 0 ? GetRandomNumber(min, max) : GetRandomNumber(validNumbers);
+    }
+
+    public static int GetRandomNumber(HashSet<int> validNumbers)
+    {
+        int randomIndex = GetRandomNumber(0, validNumbers.Count - 1);
+        return validNumbers.ElementAt(randomIndex);
     }
 
     public static int[] GenerateRandomNumbersToGetSum(int amountOfNumbers, int sum)

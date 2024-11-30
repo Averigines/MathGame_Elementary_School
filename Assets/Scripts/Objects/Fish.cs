@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Fish : MonoBehaviour
 {
     [SerializeField] private List<GameObject> variants;
-    public SpriteRenderer renderer;
+    [NonSerialized] public SpriteRenderer spriteRenderer;
     private GameObject _activeVariant;
     public void Initialize(float size, DirectionX directionX)
     {
@@ -15,16 +18,16 @@ public class Fish : MonoBehaviour
         int randomVariant = Random.Range(0, variants.Count);
         _activeVariant = variants[randomVariant];
         _activeVariant.SetActive(true);
-        renderer = _activeVariant.GetComponent<SpriteRenderer>();
+        spriteRenderer = _activeVariant.GetComponent<SpriteRenderer>();
         transform.localScale = new Vector3(size, size, transform.localScale.z);
         if (directionX == DirectionX.Left)
         {
-            renderer.flipX = true;
+            spriteRenderer.flipX = true;
         }
     }
 
     public void FlipSprite()
     {
-        renderer.flipX = !renderer.flipX;
+        spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 }

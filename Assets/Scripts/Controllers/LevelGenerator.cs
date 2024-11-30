@@ -98,12 +98,18 @@ public class LevelGenerator : MonoBehaviour
             Utils.GetRandomNumber(variation.fishForCorrectPathRange.x, variation.fishForCorrectPathRange.y);
         int totalFish = fishForCorrectPath + Utils.GetRandomNumber(variation.additionalFishRange.x, variation.additionalFishRange.y);
 
+        HashSet<int> generatedNumbers = new HashSet<int>();
         int[] correctValues = Utils.GenerateRandomNumbersToGetSum(fishForCorrectPath, levelData.goalNumber - levelData.startNumber);
-
+        foreach (var value in correctValues)
+        {
+            generatedNumbers.Add(value);
+        }
+        
         int[] additionalValues = new int[totalFish - fishForCorrectPath];
         for (int i = 0; i < additionalValues.Length; i++)
         {
-           additionalValues[i] = Utils.GetRandomNumber(1, levelData.goalNumber - 1);
+           additionalValues[i] = Utils.GetRandomNumber(1, levelData.goalNumber - 1, generatedNumbers);
+           generatedNumbers.Add(additionalValues[i]);
         }
 
         int[] allValues = correctValues.Concat(additionalValues).ToArray();
@@ -135,12 +141,18 @@ public class LevelGenerator : MonoBehaviour
             Utils.GetRandomNumber(variation.fishForCorrectPathRange.x, variation.fishForCorrectPathRange.y);
         int totalFish = fishForCorrectPath + Utils.GetRandomNumber(variation.additionalFishRange.x, variation.additionalFishRange.y);
 
+        HashSet<int> generatedNumbers = new HashSet<int>();
         int[] correctValues = Utils.GenerateRandomNumbersToGetSum(fishForCorrectPath, levelData.startNumber - levelData.goalNumber);
-
+        foreach (var value in correctValues)
+        {
+            generatedNumbers.Add(value);
+        }
+        
         int[] additionalValues = new int[totalFish - fishForCorrectPath];
         for (int i = 0; i < additionalValues.Length; i++)
         {
-            additionalValues[i] = Utils.GetRandomNumber(1, levelData.startNumber - 1);
+            additionalValues[i] = Utils.GetRandomNumber(1, levelData.startNumber - 1, generatedNumbers);
+            generatedNumbers.Add(additionalValues[i]);
         }
 
         int[] allValues = correctValues.Concat(additionalValues).ToArray();
@@ -171,13 +183,16 @@ public class LevelGenerator : MonoBehaviour
         int fishForCorrectPath = 1;
         int totalFish = fishForCorrectPath + Utils.GetRandomNumber(variation.additionalFishRange.x, variation.additionalFishRange.y);
 
+        HashSet<int> generatedNumbers = new HashSet<int>();
         int correctValue = levelData.goalNumber / levelData.startNumber;
-
+        generatedNumbers.Add(correctValue);
+        
         int[] allValues = new int[totalFish];
         allValues[0] = correctValue;
         for (int i = 1; i < allValues.Length; i++)
         {
-            allValues[i] = Utils.GetRandomNumber(2, variation.goalNumberRange.y);
+            allValues[i] = Utils.GetRandomNumber(2, variation.goalNumberRange.y, generatedNumbers);
+            generatedNumbers.Add(allValues[i]);
         }
         
         Utils.ShuffleArray(allValues);

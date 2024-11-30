@@ -37,12 +37,13 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject fishingRodHookPrefab;
     private FishingRodHook _activeFishingHook;
 
-    void Start()
+    void Awake()
     {
         ValidStatesForMoving = new[] { PlayerState.Idle, PlayerState.Moving, PlayerState.Fishing };
         ValidStatesForFishing = new[] { PlayerState.Idle, PlayerState.Moving };
         CurrPlayerState = PlayerState.Idle;
 
+        print("Called player start");
         _startPosition = transform.position;
         _targetPosition = transform.position;
 
@@ -131,6 +132,8 @@ public class Player : MonoBehaviour
     
     public void StartFishing()
     {
+        Debug.Log("Parent: " + transform.position);
+        Debug.Log("Child: " + _renderer.transform.localPosition);
         ChangePlayerState(PlayerState.Fishing);
         var go = Instantiate(fishingRodHookPrefab, fishingRod.transform);
         var minFishingHookDepth = ScreenManager.seaArea.top;

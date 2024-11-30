@@ -163,6 +163,8 @@ public class ScreenManager : MonoBehaviour
         float posX = (seaArea.left + seaArea.right) / 2f;
         float posY = seaArea.top - 0.35f;
         tf.position = new Vector3(posX, posY, tf.position.z);
+        Debug.Log("Parent: " + tf.position);
+        Debug.Log("Child: " + tf.GetComponentInChildren<SpriteRenderer>().transform.localPosition);
     }
     
     private void SetBackgroundSize()

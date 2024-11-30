@@ -140,7 +140,7 @@ public class FishClusterContainer : MonoBehaviour
     private void SetColliderSize()
     {
         var edgeFish = _fishInContainer[^1];
-        var edgeFishRenderer = edgeFish.renderer;
+        var edgeFishRenderer = edgeFish.spriteRenderer;
         var radius = edgeFish.transform.localPosition.magnitude + edgeFishRenderer.bounds.extents.magnitude;
 
         _collider.radius = radius < 0.5f ? 0.5f : radius;
