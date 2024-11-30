@@ -39,6 +39,13 @@ public class ResultUI : MonoBehaviour
         textResult.text = "Start Number: " + number;
         yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
     }
+    
+    public IEnumerator ShowGoalNumber(string number)
+    {
+        textResult.enabled = true;
+        textResult.text = "Goal Number: " + number;
+        yield return textResult.DOFade(1, fadeDuration).WaitForCompletion();
+    }
 
     public IEnumerator ShowResult(string result, int lastCatch)
     {

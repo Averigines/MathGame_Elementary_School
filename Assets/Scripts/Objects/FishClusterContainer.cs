@@ -14,6 +14,12 @@ public class FishClusterContainer : MonoBehaviour
     [SerializeField] private float fishMinScale = 0.7f;
     [SerializeField] private float fishMaxScale = 1.3f;
 
+    [SerializeField] private GameObject fishAdditionPrefab;
+    [SerializeField] private GameObject fishSubtractionPrefab;
+    [SerializeField] private GameObject fishMultiplicationPrefab;
+
+    private Dictionary<FishType, GameObject> _fishTypeToPrefabMap;
+
     [SerializeField] private Color textColorAddition;
     [SerializeField] private Color textColorSubstraction;
     [SerializeField] private Color textColorMultiplication;
@@ -48,8 +54,14 @@ public class FishClusterContainer : MonoBehaviour
         _fishTypeToFishTextMap = new Dictionary<FishType, Tuple<string, Color>>()
         {
             { FishType.Addition, new Tuple<string, Color>("+", textColorAddition) },
-            { FishType.Substraction, new Tuple<string, Color>("-", textColorSubstraction) },
+            { FishType.Subtraction, new Tuple<string, Color>("-", textColorSubstraction) },
             { FishType.Multiplication, new Tuple<string, Color>("*", textColorMultiplication) },
+        };
+        _fishTypeToPrefabMap = new Dictionary<FishType, GameObject>()
+        {
+            { FishType.Addition, fishAdditionPrefab },
+            { FishType.Subtraction, fishSubtractionPrefab },
+            { FishType.Multiplication, fishMultiplicationPrefab },
         };
     }
 
@@ -96,7 +108,7 @@ public class FishClusterContainer : MonoBehaviour
                 float size = Utils.GetRandomNumber(fishMinScale, fishMaxScale);
 
                 // Instantiate fish
-                var go = Instantiate(fishData.prefab, fishPosition, Quaternion.identity, transform);
+                var go = Instantiate(_fishTypeToPrefabMap[fishData.type], fishPosition, Quaternion.identity, transform);
                 var fish = go.GetComponent<Fish>();
                 fish.Initialize(size, _directionX);
                 _fishInContainer.Add(fish);
@@ -128,10 +140,10 @@ public class FishClusterContainer : MonoBehaviour
     private void SetColliderSize()
     {
         var edgeFish = _fishInContainer[^1];
-        var edgeFishRenderer = edgeFish.gameObject.GetComponent<SpriteRenderer>();
+        var edgeFishRenderer = edgeFish.renderer;
         var radius = edgeFish.transform.localPosition.magnitude + edgeFishRenderer.bounds.extents.magnitude;
 
-        _collider.radius = radius;
+        _collider.radius = radius < 0.5f ? 0.5f : radius;
     }
 
     private void SetFishingRangeSize()

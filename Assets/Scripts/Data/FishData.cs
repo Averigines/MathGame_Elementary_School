@@ -3,7 +3,7 @@ using UnityEngine;
 public enum FishType
 {
     Addition,
-    Substraction,
+    Subtraction,
     Multiplication,
     Division
 }
@@ -17,5 +17,4 @@ public class FishData
     [Range(0, 1)] public float swimEdgeRight;
     [Range(0, 1)] public float spawnPosY;
     public float speedX;
-    public GameObject prefab;
 }

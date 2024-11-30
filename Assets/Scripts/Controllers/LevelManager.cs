@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public event Action OnLevelCompleted;
     public event Action OnShowCalcPathStart;
     public event Action OnShowCalcPathEnd;
+    public event Action OnIncorrectScoreSubmitted;
 
     private void OnEnable()
     {
@@ -96,9 +97,11 @@ public class LevelManager : MonoBehaviour
     private IEnumerator ShowStartNumberSequence()
     {
         OnShowCalcPathStart?.Invoke();
-        string calcPathString = GetStringSequenceForCalculationPath(false);
-        
-        yield return StartCoroutine(_resultUI.ShowStartNumber(calcPathString));
+        yield return StartCoroutine(_resultUI.ShowStartNumber(_currentLevelData.startNumber.ToString()));
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(_resultUI.HideUI());
+        yield return new WaitForSeconds(0.5f);
+        yield return StartCoroutine(_resultUI.ShowGoalNumber(_currentLevelData.goalNumber.ToString()));
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(_resultUI.HideUI());
         OnShowCalcPathEnd?.Invoke();
@@ -117,8 +120,8 @@ public class LevelManager : MonoBehaviour
             case FishType.Addition:
                 _calculationPath.Add(new Tuple<FishType, int>(FishType.Addition, points));
                 break;
-            case FishType.Substraction:
-                _calculationPath.Add(new Tuple<FishType, int>(FishType.Substraction, points));
+            case FishType.Subtraction:
+                _calculationPath.Add(new Tuple<FishType, int>(FishType.Subtraction, points));
                 break;
             case FishType.Multiplication:
                 _calculationPath.Add(new Tuple<FishType, int>(FishType.Multiplication, points));
@@ -160,7 +163,7 @@ public class LevelManager : MonoBehaviour
             case FishType.Addition:
                 IncreasePoints(points);
                 break;
-            case FishType.Substraction:
+            case FishType.Subtraction:
                 SubstractPoints(points);
                 break;
             case FishType.Multiplication:
@@ -207,7 +210,7 @@ public class LevelManager : MonoBehaviour
                 case FishType.Addition:
                     calcPathString += " + " + calc.Item2;
                     break;
-                case FishType.Substraction:
+                case FishType.Subtraction:
                     calcPathString += " - " + calc.Item2;
                     break;
                 case FishType.Multiplication:
@@ -237,6 +240,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator HandleIncorrectSubmit()
     {
+        OnIncorrectScoreSubmitted?.Invoke();
         _numbersUI.ChangeSubmitButton(false);
         yield return StartCoroutine(ResultSequence(false));
         _numbersUI.ResetSubmitButton();

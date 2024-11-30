@@ -53,6 +53,9 @@ MonoBehaviour:
   fishingRange: {fileID: 3451918883287329119}
   fishMinScale: 0.7
   fishMaxScale: 1.3
+  fishAdditionPrefab: {fileID: 5291280172514582875, guid: 7838c9870f4591e44b5c6dfcc7cda637, type: 3}
+  fishSubtractionPrefab: {fileID: 5291280172514582875, guid: 26d6d8a60f2c20648a34dbb2ab850603, type: 3}
+  fishMultiplicationPrefab: {fileID: 5291280172514582875, guid: 3908604a6fc245b438799be6b93c2cef, type: 3}
   textColorAddition: {r: 0.4528302, g: 0.019223915, b: 0.03655657, a: 1}
   textColorSubstraction: {r: 0, g: 0.024019098, b: 0.6226415, a: 1}
   textColorMultiplication: {r: 0.03523384, g: 0.3018868, b: 0, a: 1}
@@ -106,7 +109,7 @@ GameObject:
   - component: {fileID: 4258997415640977589}
   m_Layer: 7
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: FishValueText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +210,7 @@ GameObject:
   - component: {fileID: 262337152898972942}
   m_Layer: 7
   m_Name: ValueText
-  m_TagString: Untagged
+  m_TagString: FishValueText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

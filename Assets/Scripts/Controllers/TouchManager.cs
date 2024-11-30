@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -100,6 +101,28 @@ public class TouchManager : MonoBehaviour
     
     private bool IsTouchOverUI(TouchControl touch)
     {
-        return EventSystem.current.IsPointerOverGameObject(touch.ReadValue().touchId);
+        Vector2 touchPosition = touch.ReadValue().position;
+
+        // Perform raycast all on the UI elements
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)
+        {
+            position = touchPosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+
+        // Loop through results and check for elements to exclude
+        foreach (RaycastResult result in results)
+        {
+            // Check if the UI element has a specific tag, name, or other identifier to exclude it
+            if (result.gameObject.CompareTag("FishValueText"))
+            {
+                return false; // This touch is over an excluded UI element
+            }
+        }
+
+        // If none of the elements are excluded, return true
+        return results.Count > 0;
     }
 }

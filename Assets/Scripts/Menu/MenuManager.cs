@@ -2,15 +2,19 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private ScreenManager screenManager;
     [SerializeField] private MenuLevelManager levelManager;
-
     [SerializeField] private LevelData menuLevel;
-    
     [SerializeField] private ScreenFade screenFade;
+
+    [SerializeField] private Toggle includeAdditionToggle;
+    [SerializeField] private Toggle includeSubstractionToggle;
+    [SerializeField] private Toggle includeMultiplicationToggle;
+    [SerializeField] private Toggle includeCombinedToggle;
 
     private void Start()
     {
@@ -24,6 +28,7 @@ public class MenuManager : MonoBehaviour
     
     public void StartGame()
     {
+        ScenePersistentData.SetChosenLevelTypes(includeAdditionToggle.isOn, includeSubstractionToggle.isOn, includeMultiplicationToggle.isOn, includeCombinedToggle.isOn);
         StartCoroutine(StartGameSequence());
     }
 
