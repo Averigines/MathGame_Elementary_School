@@ -17,4 +17,4 @@ MonoBehaviour:
   startNumberRange: {x: 6, y: 9}
   goalNumberRange: {x: 1, y: 4}
   fishForCorrectPathRange: {x: 1, y: 1}
-  additionalFishRange: {x: 2, y: 2}
+  additionalFishRange: {x: 3, y: 3}

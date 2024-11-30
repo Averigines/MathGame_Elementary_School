@@ -161,7 +161,7 @@ public class ScreenManager : MonoBehaviour
     {
         Transform tf = player.transform;
         float posX = (seaArea.left + seaArea.right) / 2f;
-        float posY = seaArea.top - 0.35f;
+        float posY = seaArea.top - 0.26f;
         tf.position = new Vector3(posX, posY, tf.position.z);
         Debug.Log("Parent: " + tf.position);
         Debug.Log("Child: " + tf.GetComponentInChildren<SpriteRenderer>().transform.localPosition);
@@ -172,9 +172,21 @@ public class ScreenManager : MonoBehaviour
         var spriteRenderer = background.GetComponent<SpriteRenderer>();
         Transform tf = background.transform;
 
-        float newScale = backgroundArea.width / spriteRenderer.bounds.size.x;
-        tf.localScale = new Vector3(newScale, newScale, tf.localScale.z);
+        var aspectRatioSprite = spriteRenderer.bounds.size.x / spriteRenderer.bounds.size.y;
+        var aspectRatioBGArea = backgroundArea.width / backgroundArea.height;
+
+        float newScale = 1f;
+        if (aspectRatioSprite > aspectRatioBGArea)
+        {
+            newScale = backgroundArea.height / spriteRenderer.bounds.size.y;
+        }
+        else
+        {
+            newScale = backgroundArea.width / spriteRenderer.bounds.size.x;
+        }
         
+        tf.localScale = new Vector3(newScale, newScale, tf.localScale.z);
+
         Vector3 backgroundCenter = new Vector3((backgroundArea.left + backgroundArea.right) / 2f,
             (backgroundArea.bottom + spriteRenderer.bounds.size.y + backgroundArea.bottom) / 2f, tf.position.z);
         tf.position = backgroundCenter;
@@ -195,15 +207,20 @@ public class ScreenManager : MonoBehaviour
     
     private void SetReflectionTextureSize()
     {
-        reflectionTexture.width = Screen.width;
-        reflectionTexture.height = (int)(Screen.height * (seaArea.height / screenArea.height));
+        var bgRenderer = background.GetComponent<SpriteRenderer>();
+        
+        Vector3 bottomleft = _mainCamera.WorldToScreenPoint(bgRenderer.bounds.min);
+        Vector3 topright = _mainCamera.WorldToScreenPoint(bgRenderer.bounds.max);
+
+        reflectionTexture.width = (int)topright.x - (int)bottomleft.x;
+        reflectionTexture.height = (int)topright.y - (int)bottomleft.y;
     }
     
     private void SetCameraSize()
     {
         Transform tf = reflectionCamera.transform;
         reflectionCamera.targetTexture = reflectionTexture;
-        reflectionCamera.orthographicSize = backgroundReflection.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        reflectionCamera.orthographicSize = background.GetComponent<SpriteRenderer>().bounds.size.y / 2;
         Vector3 cameraCenter = new Vector3((backgroundArea.left + backgroundArea.right) / 2f,
             (backgroundArea.bottom + reflectionCamera.orthographicSize * 2 + backgroundArea.bottom) / 2f, tf.position.z);
         tf.position = cameraCenter;
