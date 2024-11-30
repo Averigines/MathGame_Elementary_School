@@ -140,7 +140,7 @@ public class ScreenManager : MonoBehaviour
             (seaArea.top + seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x * 1.05f, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
     
@@ -153,7 +153,7 @@ public class ScreenManager : MonoBehaviour
             (seaArea.top + seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x * 1.05f, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
 
@@ -189,7 +189,7 @@ public class ScreenManager : MonoBehaviour
             (seaArea.top + seaArea.bottom) / 2f, tf.position.z);
         tf.position = seaCenter;
         
-        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
+        Vector3 newScale = new Vector3(seaArea.width / spriteRenderer.bounds.size.x * 1.05f, seaArea.height / spriteRenderer.bounds.size.y, tf.localScale.z);
         tf.localScale = newScale;
     }
     

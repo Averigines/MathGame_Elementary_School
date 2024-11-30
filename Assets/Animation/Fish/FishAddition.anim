@@ -22,6 +22,8 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -3997850592389210174, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    - time: 0.33333334
+      value: {fileID: 1824399040886510512, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
     - time: 0.65
       value: {fileID: 1824399040886510512, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
     attribute: m_Sprite
@@ -33,6 +35,8 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 9027674962346866873, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
+    - time: 0.33333334
+      value: {fileID: 8741177024759613667, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
     - time: 0.65
       value: {fileID: 8741177024759613667, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
     attribute: m_Sprite
@@ -44,6 +48,8 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 1636560459527808380, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
+    - time: 0.33333334
+      value: {fileID: -8198037186269165833, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
     - time: 0.65
       value: {fileID: -8198037186269165833, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
     attribute: m_Sprite
@@ -88,9 +94,12 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: -3997850592389210174, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
     - {fileID: 1824399040886510512, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
+    - {fileID: 1824399040886510512, guid: 7a903007d1b80904d88bc3640a805644, type: 3}
     - {fileID: 9027674962346866873, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
     - {fileID: 8741177024759613667, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
+    - {fileID: 8741177024759613667, guid: 0928497caa8f9e646bd93c3b199f16ed, type: 3}
     - {fileID: 1636560459527808380, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
+    - {fileID: -8198037186269165833, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
     - {fileID: -8198037186269165833, guid: 1b23ff06f915c1d48af2ef277c783ef3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
