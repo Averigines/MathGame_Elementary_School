@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44908c704b2b46040845a5bae19f9638, type: 3}
-  m_Name: AdditionHard
+  m_Name: CombinedHard
   m_EditorClassIdentifier: 
-  levelType: 0
+  levelType: 3
   levelDifficulty: 2
-  startNumberRange: {x: 1, y: 7}
-  goalNumberRange: {x: 13, y: 20}
+  startNumberRange: {x: 16, y: 84}
+  goalNumberRange: {x: -15, y: 15}
   fishForCorrectPathRange: {x: 2, y: 2}
-  additionalFishRange: {x: 6, y: 6}
+  additionalFishRange: {x: 5, y: 5}

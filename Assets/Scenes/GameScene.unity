@@ -2290,6 +2290,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 09cdd2a24f31e984aa54bcaf4c63b999, type: 2}
   - {fileID: 11400000, guid: e5d053b735f8dcc439a1b74a33abb9e3, type: 2}
   - {fileID: 11400000, guid: 3ce344da054e105418b19c7e7bcfdb8a, type: 2}
+  - {fileID: 11400000, guid: c0441369c0b63ce4198f5328e33f74d0, type: 2}
+  - {fileID: 11400000, guid: eda8485e947cae340aa0fdfee2e2daf3, type: 2}
+  - {fileID: 11400000, guid: 8303c9291a010704da51b9499bcc5cff, type: 2}
 --- !u!4 &2094450849
 Transform:
   m_ObjectHideFlags: 0
@@ -2335,8 +2338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seaHeight: 0.7
-  fishSpaceToWaterEdgeX: 1
-  fishSpaceToWaterEdgeY: 1
+  fishSpaceToWaterEdgeX: 0.25
+  fishSpaceToWaterEdgeY: 0.25
   water: {fileID: 1494144385}
   waterDistortion: {fileID: 1585529200}
   player: {fileID: 500060081}

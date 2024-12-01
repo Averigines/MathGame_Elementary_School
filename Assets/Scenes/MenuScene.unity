@@ -314,8 +314,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seaHeight: 0.7
-  fishSpaceToWaterEdgeX: 1
-  fishSpaceToWaterEdgeY: 1
+  fishSpaceToWaterEdgeX: 0.25
+  fishSpaceToWaterEdgeY: 0.25
   water: {fileID: 63181468}
   waterDistortion: {fileID: 1037351688}
   player: {fileID: 756373585}
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Combined (Grade 3 - 4)
+  m_text: 'Combined (Grade 2 - 3)
 
 '
   m_isRightToLeft: 0
@@ -1982,7 +1982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Substraction (Grade 1)
+  m_text: 'Substraction (Grade 1 - 2)
 
 
 '
@@ -2183,8 +2183,8 @@ RectTransform:
   m_Children:
   - {fileID: 399380553}
   - {fileID: 1137825371}
-  - {fileID: 1286124543}
   - {fileID: 499895821}
+  - {fileID: 1286124543}
   m_Father: {fileID: 1153467793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -3124,7 +3124,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Addition (Grade 1)
+  m_text: 'Addition (Grade 1 - 2)
 
 '
   m_isRightToLeft: 0

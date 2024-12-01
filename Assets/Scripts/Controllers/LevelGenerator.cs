@@ -20,7 +20,7 @@ public class LevelGenerator : MonoBehaviour
                 levelData = GenerateMultiplicationLevel(variation);
                 break;
             case LevelType.Combined:
-                //levelData = GenerateCombinedLevel(variation);
+                levelData = GenerateCombinedLevel(variation);
                 break;
         }
 
@@ -90,6 +90,77 @@ public class LevelGenerator : MonoBehaviour
         levelData.availableFish = GenerateFishDataMultiplication(FishType.Multiplication, levelData, variation);
 
         return levelData;
+    }
+
+    private static LevelData GenerateCombinedLevel(LevelVariation variation)
+    {
+        LevelData levelData = ScriptableObject.CreateInstance<LevelData>();
+
+        levelData.startNumber = Utils.GetRandomNumber(variation.startNumberRange.x, variation.startNumberRange.y);
+        int difference = Utils.GetRandomNumber(variation.goalNumberRange.x, variation.goalNumberRange.y,
+            0);
+        levelData.goalNumber = levelData.startNumber + difference;
+        
+        int maxNumberIndividual = 0;
+        if (variation.levelDifficulty == LevelDifficulty.Easy || variation.levelDifficulty == LevelDifficulty.Medium)
+        {
+            maxNumberIndividual = 9;
+        }
+        else if (variation.levelDifficulty == LevelDifficulty.Hard)
+        {
+            maxNumberIndividual = 19;
+        }
+
+        List<Tuple<FishType, int>> fishDataToBeCreated = new List<Tuple<FishType, int>>();
+
+        FishType startType = difference > 0 ? FishType.Addition : FishType.Subtraction;
+        FishType currType = startType;
+
+        Vector2Int numberRange = new Vector2Int(Math.Abs(difference) + 1, maxNumberIndividual);
+        int number = Utils.GetRandomNumber(numberRange.x, numberRange.y);
+        fishDataToBeCreated.Add(new Tuple<FishType, int>(currType, number));
+                
+        currType = currType == FishType.Addition ? FishType.Subtraction : FishType.Addition;
+        number = Math.Abs(Math.Abs(difference) - number);
+        fishDataToBeCreated.Add(new Tuple<FishType, int>(currType, number));
+
+
+        for (int i = 0; i < variation.additionalFishRange.x; i++)
+        {
+            number = Utils.GetRandomNumber(1, maxNumberIndividual);
+            currType = currType == FishType.Addition ? FishType.Subtraction : FishType.Addition;
+            fishDataToBeCreated.Add(new Tuple<FishType, int>(currType, number));
+        }
+
+        levelData.availableFish = GenerateFishDataMixed(fishDataToBeCreated, variation);
+
+        return levelData;
+    }
+
+    private static FishData[] GenerateFishDataMixed(List<Tuple<FishType, int>> fishList, LevelVariation variation)
+    {
+        Tuple<FishType, int>[] allValues = fishList.ToArray();
+        Utils.ShuffleArray(allValues);
+        
+        float[] allSpawnPosY = Utils.GetNumbersDistributedEvenly(allValues.Length, 0, 1, 0.1f);
+        Vector2[] allSwimEdges = GetRandomSwimEdges(allValues.Length);
+        
+        List<FishData> fishDataList = new List<FishData>();
+        for (int i = 0; i < allValues.Length; i++)
+        {
+            
+            fishDataList.Add(new FishData
+            {
+                type = allValues[i].Item1,
+                amount = allValues[i].Item2,
+                swimEdgeLeft = allSwimEdges[i].x,
+                swimEdgeRight = allSwimEdges[i].y,
+                spawnPosY = allSpawnPosY[i],
+                speedX = Utils.GetRandomNumber(0.3f, 1f),
+            });
+        }
+
+        return fishDataList.ToArray();
     }
 
     private static FishData[] GenerateFishDataAddition(FishType type, LevelData levelData, LevelVariation variation)
