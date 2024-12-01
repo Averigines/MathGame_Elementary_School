@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 public class ScreenManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject backgroundReflection;
     [SerializeField] private RenderTexture reflectionTexture;
     [SerializeField] private Camera reflectionCamera;
-    
+
     public struct ScreenArea
     {
         public float bottom;
