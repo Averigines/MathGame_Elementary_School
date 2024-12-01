@@ -1,5 +1,0 @@
-TODO:
-
-Maybe change existing fish to be more pretty
-Add different levels
-Add videos and HowToPlay section
