@@ -839,7 +839,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 283366731}
         m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OpenTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

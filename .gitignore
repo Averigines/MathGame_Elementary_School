@@ -77,6 +77,3 @@ crashlytics-build.properties
 # Ignore temporaries from GameCI
 /[Aa]rtifacts/
 /[Cc]odeCoverage/
-
-# Ignore TutorialVideos
-/[Aa]ssets/[Vv]ideos/
